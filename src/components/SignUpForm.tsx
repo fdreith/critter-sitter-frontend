@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 
-class SignUpForm extends Component {
+class SignUpForm extends Component <any>{
   state = {
     email: "",
     password: "",
     //more here
   };
 
-  handleChange = (event) => {
+  handleChange = (event: any) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = (event: any) => {
     event.preventDefault();
-    this.props.login(this.state, this.props.history);
+    this.props.login(this.state);
   };
 
   render() {

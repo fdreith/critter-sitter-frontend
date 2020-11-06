@@ -5,12 +5,8 @@ import { getCurrentUser } from "./actions/currentUser";
 import AuthContainer from './components/AuthContainer'
 import NavBar from "./components/NavBar";
 
-interface AppProps {
-  getCurrentUser: any,
-  loggedIn: any,
-}
 
-class App extends Component <AppProps>{
+class App extends Component <any>{
   componentDidMount() {
     this.props.getCurrentUser();
   }
@@ -31,9 +27,9 @@ class App extends Component <AppProps>{
   
 
  const mapStateToProps = (state: any) => {
-  return {
+   return {
      loggedIn: !!state.currentUser,
-  };
+   };
  };
 
 export default App;

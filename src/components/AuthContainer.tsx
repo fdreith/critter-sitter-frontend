@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 // }
 
-class AuthContainer extends Component {
+class AuthContainer extends Component <any>{
   // componentDidMount() {
   //   this.props.history.push("/login");
   // }

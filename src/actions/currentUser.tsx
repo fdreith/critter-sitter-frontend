@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:3000/api/v1";
 
 export const getCurrentUser = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
     return fetch(`${BASE_URL}/get_current_user"`, {
       credentials: "include",
       method: "GET",
@@ -17,14 +17,13 @@ export const getCurrentUser = () => {
           console.log(response.error);
         } else {
           dispatch(setCurrentUser(response.data));
-          dispatch(setTasks(response.included));
         }
       });
   };
 };
 
-export const login = (credentials) => {
-  return (dispatch) => {
+export const login = (credentials:any) => {
+  return (dispatch:any) => {
     return fetch(`${BASE_URL}/login`, {
       credentials: "include",
       method: "POST",
@@ -46,15 +45,15 @@ export const login = (credentials) => {
   };
 };
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = (user: any) => {
   return {
     type: "SET_CURRENT_USER",
     user,
   };
 };
 
-export const logout = (event) => {
-  return (dispatch) => {
+export const logout = (event: any) => {
+  return (dispatch:any ) => {
     dispatch(clearCurrentUser());
     return fetch(`${BASE_URL}/logout`, {
       credentials: "include",
@@ -69,8 +68,8 @@ export const clearCurrentUser = () => {
   };
 };
 
-export const signUp = (credentials) => {
-  return (dispatch) => {
+export const signUp = (credentials: any) => {
+  return (dispatch: any) => {
     const userInfo = {
       user: credentials,
     };

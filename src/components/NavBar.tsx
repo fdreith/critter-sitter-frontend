@@ -2,7 +2,7 @@ import React from "react";
 import Logout from "./Logout";
 
 
-const NavBar = (props) => {
+const NavBar = (props: any) => {
   return (
     <div className="NavBar">
       <>
