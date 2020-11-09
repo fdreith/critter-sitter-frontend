@@ -23,14 +23,15 @@ class LoginForm extends React.Component<any> {
         <form action="/action_page.php" method="post">
           Email:
           <br />
-          <input type="text" name="email" />
+          <input type="text" name="email" placeholder="email"/>
           <br />
           Password:
           <br />
-          <input type="password" name="password" />
+          <input type="password" name="password" placeholder="password"/>
           <br />
           <input type="submit" value="Login" />
         </form>
+        <a href="signup">Register</a>
       </div>
     );
   }

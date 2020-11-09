@@ -7,7 +7,7 @@ const NavBar = (props: any) => {
     <div className="NavBar">
       <>
         <a href="#default" className="logo">
-          <img src={logo} alt="Critter Sitter" height={100} width={300} />
+          <img src={logo} alt="Critter Sitter" height={110} width={300} />
         </a>
 
         {props.loggedIn ? (
