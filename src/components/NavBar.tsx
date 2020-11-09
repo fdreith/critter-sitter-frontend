@@ -6,7 +6,7 @@ import SignUpForm from "./SignUpForm";
 
 const NavBar = (props: any) => {
   return (
-    <div className="NavBar">
+    <div className="navbar">
       <>
         <a href="#default" className="logo">
           <img src={logo} alt="Critter Sitter" height={110} width={300} />
