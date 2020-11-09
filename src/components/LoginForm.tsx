@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-class LoginForm extends Component <any>{
+class LoginForm extends React.Component<any> {
   state = {
     email: "",
     password: "",
@@ -12,14 +12,26 @@ class LoginForm extends Component <any>{
     });
   };
 
-  handleSubmit = (event:any) => {
+  handleSubmit = (event: any) => {
     event.preventDefault();
     this.props.login(this.state, this.props.history);
   };
 
   render() {
     return (
-      "form"
+      <div className="container">
+        <form action="/action_page.php" method="post">
+          Email:
+          <br />
+          <input type="text" name="email" />
+          <br />
+          Password:
+          <br />
+          <input type="password" name="password" />
+          <br />
+          <input type="submit" value="Login" />
+        </form>
+      </div>
     );
   }
 }

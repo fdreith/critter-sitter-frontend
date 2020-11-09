@@ -11,13 +11,12 @@ import { connect } from "react-redux";
 
 // }
 
-class AuthContainer extends Component <any>{
-  // componentDidMount() {
-  //   this.props.history.push("/login");
-  // }
-  render() {
-    console.log(this.props.login, this.props.signup);
+class AuthContainer extends Component<any> {
+  componentDidMount() {
+    this.props.history.push("/login");
+  }
 
+  render() {
     return (
       <Switch>
         <Route
@@ -25,7 +24,7 @@ class AuthContainer extends Component <any>{
           render={(routerProps) => (
             <LoginForm
               {...routerProps}
-              // history={this.props.history}
+              history={this.props.history}
               login={this.props.login}
             />
           )}
@@ -33,7 +32,11 @@ class AuthContainer extends Component <any>{
         <Route
           path="/signup"
           render={(routerProps) => (
-            <SignUpForm {...routerProps} signUp={this.props.signUp} />
+            <SignUpForm
+              {...routerProps}
+              departments={this.props.departments}
+              signUp={this.props.signUp}
+            />
           )}
         />
       </Switch>

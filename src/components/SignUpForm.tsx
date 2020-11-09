@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-class SignUpForm extends Component <any>{
+class SignUpForm extends React.Component <any>{
   state = {
     email: "",
     password: "",

@@ -1,26 +1,26 @@
 import React from "react";
-import Logout from "./Logout";
-
+// import Logout from "./Logout";
+import logo from "../images/Critter Sitter Logo - long.png"
 
 const NavBar = (props: any) => {
   return (
     <div className="NavBar">
       <>
+        <a href="#default" className="logo">
+          <img src={logo} alt="Critter Sitter" height={100} width={300} />
+        </a>
+
         {props.loggedIn ? (
-          <div >
-            <div>
-              <h3>Task Assign</h3>
-            </div>
-            <div>
-              nagivation items
-            </div>
-            <div>
-              <Logout history={props.history} />
+          <div>
+            <div>nagivation items</div>
+            <div className="NavBar-right">
+              <a href="#logout">Logout</a>
+              {/* <Logout history={props.history} /> */}
             </div>
           </div>
         ) : (
-          <div >
-            login or sign up?
+          <div className="NavBar-right">
+            <a href="#signup">Register</a>
           </div>
         )}
       </>
