@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class LoginForm extends React.Component<any> {
   state = {
@@ -19,19 +20,19 @@ class LoginForm extends React.Component<any> {
 
   render() {
     return (
-      <div className="container">
+      <div className="contianer">
         <form action="/action_page.php" method="post">
           Email:
           <br />
-          <input type="text" name="email" placeholder="email"/>
+          <input type="text" name="email" placeholder="email" />
           <br />
           Password:
           <br />
-          <input type="password" name="password" placeholder="password"/>
+          <input type="password" name="password" placeholder="password" />
           <br />
           <input type="submit" value="Login" />
         </form>
-        <a href="signup">Register</a>
+        <NavLink to="/register">Register</NavLink>
       </div>
     );
   }

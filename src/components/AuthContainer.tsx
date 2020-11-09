@@ -6,10 +6,6 @@ import { signUp } from "../actions/currentUser";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-// interface AuthProps {
-//   login:
-
-// }
 
 class AuthContainer extends Component<any> {
   componentDidMount() {
@@ -30,7 +26,7 @@ class AuthContainer extends Component<any> {
           )}
         />
         <Route
-          path="/signup"
+          path="/register"
           render={(routerProps) => (
             <SignUpForm
               {...routerProps}
