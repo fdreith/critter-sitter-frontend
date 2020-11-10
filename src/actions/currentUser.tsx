@@ -7,6 +7,7 @@ export const getCurrentUser = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Credentials": "true",
       },
     })
       .then((resp) => {
@@ -16,20 +17,21 @@ export const getCurrentUser = () => {
         if (response.error) {
           console.log(response.error);
         } else {
-          dispatch(setCurrentUser(response.data));
+          dispatch(setCurrentUser(response));
         }
       });
   };
 };
 
-export const login = (credentials:any) => {
-  return (dispatch:any) => {
+export const login = (credentials: any) => {
+  return (dispatch: any) => {
     return fetch(`${BASE_URL}/login`, {
       credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        // "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify(credentials),
     })
@@ -38,7 +40,7 @@ export const login = (credentials:any) => {
         if (response.error) {
           alert(response.error);
         } else {
-          dispatch(setCurrentUser(response.data));
+          dispatch(setCurrentUser(response));
         }
       })
       .catch(alert);
@@ -53,7 +55,7 @@ export const setCurrentUser = (user: any) => {
 };
 
 export const logout = (event: any) => {
-  return (dispatch:any ) => {
+  return (dispatch: any) => {
     dispatch(clearCurrentUser());
     return fetch(`${BASE_URL}/logout`, {
       credentials: "include",
@@ -79,6 +81,7 @@ export const signUp = (credentials: any) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        // "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify(userInfo),
     })
@@ -87,7 +90,7 @@ export const signUp = (credentials: any) => {
         if (response.error) {
           alert(response.error);
         } else {
-          dispatch(setCurrentUser(response.data));
+          dispatch(setCurrentUser(response));
           // history.push('/')
         }
       })

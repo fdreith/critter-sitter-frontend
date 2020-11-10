@@ -6,7 +6,6 @@ import { signUp } from "../actions/currentUser";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-
 class AuthContainer extends Component<any> {
   componentDidMount() {
     this.props.history.push("/login");

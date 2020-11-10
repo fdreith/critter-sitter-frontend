@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 
 class SignUpForm extends React.Component<any> {
   state = {
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
-    //more here
   };
 
   handleChange = (event: any) => {
@@ -16,28 +17,48 @@ class SignUpForm extends React.Component<any> {
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    this.props.login(this.state);
+    this.props.signUp(this.state);
   };
 
   render() {
     return (
       <div className="contianer">
-        <form action="/action_page.php" method="post">
+        <form onSubmit={this.handleSubmit}>
           First Name:
           <br />
-          <input type="text" name="firstName" placeholder="First Name" />
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            onChange={this.handleChange}
+          />
           <br />
           Last Name:
           <br />
-          <input type="text" name="lastName" placeholder="Last Name" />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            onChange={this.handleChange}
+          />
           <br />
           Email:
           <br />
-          <input type="text" name="email" placeholder="email" />
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            onChange={this.handleChange}
+          />
           <br />
           Password:
           <br />
-          <input type="password" name="password" placeholder="password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={this.handleChange}
+          />
           <br />
           <input type="submit" value="Register" />
           <br />

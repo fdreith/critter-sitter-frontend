@@ -21,14 +21,24 @@ class LoginForm extends React.Component<any> {
   render() {
     return (
       <div className="contianer">
-        <form action="/action_page.php" method="post">
+        <form onSubmit={this.handleSubmit}>
           Email:
           <br />
-          <input type="text" name="email" placeholder="email" />
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            onChange={this.handleChange}
+          />
           <br />
           Password:
           <br />
-          <input type="password" name="password" placeholder="password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={this.handleChange}
+          />
           <br />
           <input type="submit" value="Login" />
         </form>

@@ -5,13 +5,14 @@ import { logout } from "../actions/currentUser";
 const Logout = (props: any) => {
   return (
     <form
+      className="logout"
       onSubmit={(event) => {
         event.preventDefault();
         props.logout();
-        props.history.push("/");
+        // props.history.push("/");
       }}
     >
-      Logout
+      <button>Logout</button>
     </form>
   );
 };

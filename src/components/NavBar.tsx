@@ -1,8 +1,8 @@
 import React from "react";
 // import Logout from "./Logout";
 import logo from "../images/Critter Sitter Logo - long.png";
-import { Route, NavLink } from "react-router-dom";
-import SignUpForm from "./SignUpForm";
+import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
 
 const NavBar = (props: any) => {
   return (
@@ -16,8 +16,7 @@ const NavBar = (props: any) => {
           <div>
             <div>nagivation items</div>
             <div className="NavBar-right">
-              <a href="#logout">Logout</a>
-              {/* <Logout history={props.history} /> */}
+              <Logout history={props.history} />
             </div>
           </div>
         ) : (
