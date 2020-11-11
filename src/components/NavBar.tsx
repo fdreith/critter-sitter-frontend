@@ -8,13 +8,20 @@ const NavBar = (props: any) => {
   return (
     <div className="navbar">
       <>
-        <a href="#default" className="logo">
+        <NavLink to="/home">
           <img src={logo} alt="Critter Sitter" height={110} width={300} />
-        </a>
+        </NavLink>
 
         {props.loggedIn ? (
           <div>
-            <div>nagivation items</div>
+            <div>
+              <NavLink className="navbar-item" to="/households">
+                Households
+              </NavLink>
+              <NavLink className="navbar-item" to="/pets">
+                Pets
+              </NavLink>
+            </div>
             <div className="NavBar-right">
               <Logout history={props.history} />
             </div>

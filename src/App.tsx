@@ -3,9 +3,10 @@ import "./App.css";
 import { getCurrentUser } from "./actions/currentUser";
 import AuthContainer from "./components/AuthContainer";
 import NavBar from "./components/NavBar";
-import { withRouter } from "react-router-dom"; 
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
+import HouseholdsContainer from "./components/Households";
+import AppContainer from "./components/AppContainer";
 
 class App extends Component<any> {
   componentDidMount() {
@@ -16,7 +17,11 @@ class App extends Component<any> {
       <div className="App">
         <NavBar loggedIn={this.props.loggedIn} />
         <br />
-        {this.props.loggedIn ? "home" : <AuthContainer history={this.props.history}/>}
+        {this.props.loggedIn ? (
+          <AppContainer history={this.props.history} />
+        ) : (
+          <AuthContainer history={this.props.history} />
+        )}
       </div>
     );
   }
@@ -28,8 +33,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, { getCurrentUser})(
-    App
-  )
-);
+export default withRouter(connect(mapStateToProps, { getCurrentUser })(App));
