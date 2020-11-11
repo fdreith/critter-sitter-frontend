@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import { login, signUp, logout } from "../actions/currentUser";
+import { login, signUp } from "../actions/currentUser";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 class AuthContainer extends Component<any> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.history.push("/login");
   }
 
@@ -38,4 +38,4 @@ class AuthContainer extends Component<any> {
   }
 }
 
-export default connect(null, { login, signUp, logout })(AuthContainer);
+export default connect(null, { login, signUp})(AuthContainer);

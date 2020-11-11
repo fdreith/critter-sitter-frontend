@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 class Pets extends React.Component<any> {
   render() {

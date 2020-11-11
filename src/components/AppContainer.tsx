@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Households from "./Households";
 import Pets from "./Pets";
+import { connect } from "react-redux";
 
 class AppContainer extends Component<any> {
   componentDidMount() {
@@ -35,4 +36,10 @@ class AppContainer extends Component<any> {
   }
 }
 
-export default AppContainer
+const mapStateToProps = (state: any) => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(AppContainer);
