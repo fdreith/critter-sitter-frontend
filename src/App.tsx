@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import AuthContainer from "./components/AuthContainer";
-import { getCurrentUser } from "./actions/currentUser";
+import { getCurrentUser, logout } from "./actions/currentUser";
 
 import NavBar from "./components/NavBar";
 import { withRouter } from "react-router-dom";
@@ -13,10 +13,13 @@ class App extends Component<any> {
     this.props.getCurrentUser();
   }
   render() {
-    console.log(this.props.loggedIn)
     return (
       <div className="App">
-        <NavBar loggedIn={this.props.loggedIn} history={this.props.history} />
+        <NavBar
+          loggedIn={this.props.loggedIn}
+          history={this.props.history}
+          logout={this.props.logout}
+        />
         <br />
         {this.props.loggedIn ? (
           <AppContainer history={this.props.history} />
@@ -34,4 +37,6 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { getCurrentUser })(App));
+export default withRouter(
+  connect(mapStateToProps, { getCurrentUser, logout })(App)
+);
