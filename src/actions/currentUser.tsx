@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000/api/v1";
 
 export const getCurrentUser = () => {
   return (dispatch: any) => {
-    return fetch(`${BASE_URL}/get_current_user"`, {
+    return fetch(`${BASE_URL}/get_current_user`, {
       credentials: "include",
       method: "GET",
       headers: {

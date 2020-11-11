@@ -5,6 +5,7 @@ import { login } from "../actions/currentUser";
 import { signUp } from "../actions/currentUser";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import Logout from "./Logout";
 
 class AuthContainer extends Component<any> {
   componentDidMount() {
