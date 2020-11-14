@@ -38,4 +38,4 @@ class AuthContainer extends Component<any> {
   }
 }
 
-export default connect(null, { login, signUp})(AuthContainer);
+export default connect(null, { login, signUp })(AuthContainer);

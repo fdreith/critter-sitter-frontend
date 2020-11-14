@@ -33,7 +33,8 @@
     "overrides": [
       {
         "files": [
-          "src/reducers/currentUser.tsx"
+          "src/reducers/currentUser.tsx",
+          "src/reducers/households.tsx"
         ],
         "rules": {
           "import/no-anonymous-default-export": "off"
