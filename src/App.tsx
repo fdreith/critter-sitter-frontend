@@ -9,12 +9,14 @@ import { connect } from "react-redux";
 import Households from "./components/Households";
 import Pets from "./components/Pets";
 import { fetchPets } from "./actions/pets";
+import { fetchEvents } from "./actions/events";
 
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
     this.props.history.push("/home");
     this.props.fetchPets();
+    this.props.fetchEvents();
   }
   render() {
     return (
@@ -74,9 +76,12 @@ const mapStateToProps = (state: any) => {
     households: state.households,
     currentUser: state.currentUser,
     pets: state.pets,
+    events: state.events,
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentUser, logout, fetchPets })(App)
+  connect(mapStateToProps, { getCurrentUser, logout, fetchPets, fetchEvents })(
+    App
+  )
 );
