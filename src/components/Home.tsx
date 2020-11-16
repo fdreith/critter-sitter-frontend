@@ -5,6 +5,7 @@ class Home extends React.Component<any> {
     return (
       <div className="contianer">
         <h2> Home</h2>
+        Overview of events and reminders of pets, in household containers?
       </div>
     );
   }
