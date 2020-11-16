@@ -10,6 +10,7 @@ import { combineReducers } from "redux";
 import currentUser from "./reducers/currentUser";
 import households from "./reducers/households";
 import pets from "./reducers/pets";
+import events from "./reducers/events";
 
 declare global {
   interface Window {
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   currentUser,
   households,
   pets,
+  events,
 });
 
 export type RootReducer = ReturnType<typeof rootReducer>;
