@@ -13,6 +13,3 @@ export default (state = [], action: any) => {
   }
 };
 
-// const currentHouseholds = (households: any, curentUserId: any) => (
-//   households.filter()
-// )

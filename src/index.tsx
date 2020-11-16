@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import currentUser from "./reducers/currentUser";
 import households from "./reducers/households";
+import pets from "./reducers/pets";
 
 declare global {
   interface Window {
@@ -19,6 +20,7 @@ declare global {
 const rootReducer = combineReducers({
   currentUser,
   households,
+  pets,
 });
 
 export type RootReducer = ReturnType<typeof rootReducer>;

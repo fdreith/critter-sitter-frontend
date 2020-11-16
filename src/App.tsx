@@ -8,13 +8,13 @@ import { withRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Households from "./components/Households";
 import Pets from "./components/Pets";
-// import { fetchHouseholds } from "./actions/households";
+import { fetchPets } from "./actions/pets";
 
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
     this.props.history.push("/home");
-    // this.props.fetchHouseholds(this.props.currentUser);
+    this.props.fetchPets();
   }
   render() {
     return (
@@ -55,6 +55,7 @@ class App extends Component<any> {
                   {...routerProps}
                   history={this.props.history}
                   currentUser={this.props.currentUser}
+                  pets={this.props.pets}
                 />
               )}
             />
@@ -72,9 +73,10 @@ const mapStateToProps = (state: any) => {
     loggedIn: !!state.currentUser,
     households: state.households,
     currentUser: state.currentUser,
+    pets: state.pets,
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentUser, logout })(App)
+  connect(mapStateToProps, { getCurrentUser, logout, fetchPets })(App)
 );
