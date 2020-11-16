@@ -1,3 +1,5 @@
+import { setHouseholds } from "./households";
+
 const BASE_URL = "http://localhost:3000/api/v1";
 
 export const getCurrentUser = () => {
@@ -17,7 +19,8 @@ export const getCurrentUser = () => {
         if (response.error) {
           console.log(response.error);
         } else {
-          dispatch(setCurrentUser(response));
+          dispatch(setCurrentUser(response.data));
+          dispatch(setHouseholds(response.included));
         }
       });
   };

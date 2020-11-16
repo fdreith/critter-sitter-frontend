@@ -8,13 +8,13 @@ import { withRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Households from "./components/Households";
 import Pets from "./components/Pets";
-import { fetchHouseholds } from "./actions/households";
+// import { fetchHouseholds } from "./actions/households";
 
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
     this.props.history.push("/home");
-    this.props.fetchHouseholds(this.props.currentUser);
+    // this.props.fetchHouseholds(this.props.currentUser);
   }
   render() {
     return (
@@ -30,19 +30,32 @@ class App extends Component<any> {
             <Route
               path="/home"
               render={(routerProps) => (
-                <Home {...routerProps} history={this.props.history} />
+                <Home
+                  {...routerProps}
+                  history={this.props.history}
+                  currentUser={this.props.currentUser}
+                />
               )}
             />
             <Route
               path="/households"
               render={(routerProps) => (
-                <Households {...routerProps} history={this.props.history} />
+                <Households
+                  {...routerProps}
+                  history={this.props.history}
+                  currentUser={this.props.currentUser}
+                  households={this.props.households}
+                />
               )}
             />
             <Route
               path="/pets"
               render={(routerProps) => (
-                <Pets {...routerProps} history={this.props.history} />
+                <Pets
+                  {...routerProps}
+                  history={this.props.history}
+                  currentUser={this.props.currentUser}
+                />
               )}
             />
           </Switch>
@@ -63,5 +76,5 @@ const mapStateToProps = (state: any) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentUser, logout, fetchHouseholds })(App)
+  connect(mapStateToProps, { getCurrentUser, logout })(App)
 );
