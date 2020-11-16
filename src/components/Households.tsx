@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
+import HouseholdInfo from "./HouseholdInfo";
 
 class Households extends React.Component<any> {
   state = {
@@ -38,7 +39,7 @@ class Households extends React.Component<any> {
           household={this.state.household}
           showModal={this.state.showModal}
         >
-          hi
+          <HouseholdInfo household={this.state.household}/>
         </Modal>
       </div>
     );
