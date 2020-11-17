@@ -3,6 +3,7 @@ export default (state = [], action: any) => {
     case "SET_HOUSEHOLDS":
       return action.households;
     case "ADD_HOUSEHOLD":
+      debugger
       return state.concat(action.HOUSEHOLD.data);
     case "DELETE_HOUSEHOLD":
       return state.filter(

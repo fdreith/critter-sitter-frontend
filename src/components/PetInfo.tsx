@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+// import { useSelector } from "react-redux";
+// import { createSelector } from "reselect";
 
 //use selector to get events, records, and reminders for pet
 

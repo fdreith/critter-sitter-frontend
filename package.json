@@ -37,7 +37,8 @@
           "src/reducers/currentUser.tsx",
           "src/reducers/households.tsx",
           "src/reducers/pets.tsx",
-          "src/reducers/events.tsx"
+          "src/reducers/events.tsx",
+          "src/reducers/users.tsx"
         ],
         "rules": {
           "import/no-anonymous-default-export": "off"

@@ -46,7 +46,7 @@ export const login = (credentials: any) => {
           dispatch(setCurrentUser(response));
         }
       })
-      .catch(alert);
+      // .catch(alert);
   };
 };
 
@@ -97,6 +97,6 @@ export const signUp = (credentials: any) => {
           // history.push('/')
         }
       })
-      .catch(alert);
+      // .catch(alert);
   };
 };

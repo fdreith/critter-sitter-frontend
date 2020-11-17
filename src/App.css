@@ -121,12 +121,12 @@ textarea {
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  color: #ffffff;
+  color: #020202;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
   transition: all 0.2s;
 }
 
 button:hover {
-  background-color: #4095c6;
+  background-color: #d5d156;
 }
