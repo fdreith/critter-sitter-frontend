@@ -1,15 +1,17 @@
 const BASE_URL = "http://localhost:3000/api/v1";
 
-export const setHouseholds = (households: any) => {
+export const setHouseholds = (data: any) => {
   return {
     type: "SET_HOUSEHOLDS",
-    households,
+    data,
   };
 };
 
-export const postHousehold = (household: any) => {
-  debugger;
+export const postHousehold = (credentials: any) => {
   return (dispatch: any) => {
+    const householdInfo = {
+      household: credentials,
+    };
     return fetch(`${BASE_URL}/households`, {
       credentials: "include",
       method: "POST",
@@ -18,12 +20,12 @@ export const postHousehold = (household: any) => {
         Accept: "application/json",
         // "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(household),
+      body: JSON.stringify(householdInfo),
     })
       .then((resp) => resp.json())
       .then((response) => {
         if (response.errors) {
-          alert(response.errors);
+          console.log(response.errors);
         } else {
           dispatch(addHousehold(response));
         }

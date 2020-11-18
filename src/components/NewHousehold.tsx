@@ -57,7 +57,7 @@ class NewHousehold extends React.Component<any> {
             onChange={this.handleChange}
           />
           <br />
-          <input type="submit" value="Login" />
+          <input type="submit" value="Create Household" />
         </form>
       </div>
     );

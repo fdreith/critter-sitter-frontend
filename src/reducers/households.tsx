@@ -1,10 +1,14 @@
 export default (state = [], action: any) => {
   switch (action.type) {
     case "SET_HOUSEHOLDS":
-      return action.households;
+      const households = action.data.included.filter((household: any) => {
+        return household.relationships.users.data.find(
+          (user: any) => user.id === action.data.data.id
+        );
+      });
+      return households;
     case "ADD_HOUSEHOLD":
-      debugger
-      return state.concat(action.HOUSEHOLD.data);
+      return state.concat(action.household.data);
     case "DELETE_HOUSEHOLD":
       return state.filter(
         (household: any) => parseInt(household.id) !== action.householdId
@@ -13,4 +17,3 @@ export default (state = [], action: any) => {
       return state;
   }
 };
-
