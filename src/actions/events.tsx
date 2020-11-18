@@ -14,8 +14,8 @@ export const fetchEvents = () => {
         return resp.json();
       })
       .then((response) => {
-        if (response.error) {
-          console.log(response.error);
+        if (response.errors) {
+          console.log(response.errors);
         } else {
           dispatch(setEvents(response.data));
         }

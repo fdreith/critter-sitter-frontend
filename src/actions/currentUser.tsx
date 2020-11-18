@@ -16,8 +16,8 @@ export const getCurrentUser = () => {
         return resp.json();
       })
       .then((response) => {
-        if (response.error) {
-          console.log(response.error);
+        if (response.errors) {
+          console.log(response.errors);
         } else {
           dispatch(setCurrentUser(response.data));
           dispatch(setHouseholds(response.included));
@@ -40,13 +40,13 @@ export const login = (credentials: any) => {
     })
       .then((resp) => resp.json())
       .then((response) => {
-        if (response.error) {
-          alert(response.error);
+        if (response.errors) {
+          alert(response.errors);
         } else {
           dispatch(setCurrentUser(response));
         }
-      })
-      // .catch(alert);
+      });
+    // .catch(alert);
   };
 };
 
@@ -90,13 +90,14 @@ export const signUp = (credentials: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        if (response.error) {
-          alert(response.error);
+        debugger;
+        if (response.errors) {
+          alert(response.errors);
         } else {
           dispatch(setCurrentUser(response));
           // history.push('/')
         }
-      })
-      // .catch(alert);
+      });
+    // .catch(alert);
   };
 };

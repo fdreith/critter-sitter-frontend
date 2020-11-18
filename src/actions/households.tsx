@@ -22,8 +22,8 @@ export const postHousehold = (household: any) => {
     })
       .then((resp) => resp.json())
       .then((response) => {
-        if (response.error) {
-          alert(response.error);
+        if (response.errors) {
+          alert(response.errors);
         } else {
           dispatch(addHousehold(response));
         }

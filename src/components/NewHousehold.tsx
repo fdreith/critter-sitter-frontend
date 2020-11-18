@@ -12,7 +12,7 @@ class NewHousehold extends React.Component<any> {
     name: "",
     address: "",
     owner_id: parseInt(this.props.currentUser.id),
-    passcode: "",
+    password: "",
   };
 
   handleChange = (event: any) => {
@@ -52,7 +52,7 @@ class NewHousehold extends React.Component<any> {
           <br />
           <input
             type="password"
-            name="passcode"
+            name="password"
             placeholder="passcode"
             onChange={this.handleChange}
           />

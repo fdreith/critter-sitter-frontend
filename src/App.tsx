@@ -19,6 +19,7 @@ class App extends Component<any> {
     this.props.fetchEvents();
   }
   render() {
+    console.log(this.props.currentUser);
     return (
       <div className="App">
         <NavBar

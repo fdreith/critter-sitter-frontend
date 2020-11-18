@@ -14,8 +14,8 @@ export const fetchUsers = () => {
         return resp.json();
       })
       .then((response) => {
-        if (response.error) {
-          console.log(response.error);
+        if (response.errors) {
+          console.log(response.errors);
         } else {
           dispatch(setUsers(response.data));
         }
