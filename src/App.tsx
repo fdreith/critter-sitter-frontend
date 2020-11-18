@@ -14,9 +14,9 @@ import { fetchEvents } from "./actions/events";
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
-    this.props.history.push("/home");
     this.props.fetchPets();
     this.props.fetchEvents();
+    this.props.history.push("/home");
   }
   render() {
     console.log(this.props.currentUser);

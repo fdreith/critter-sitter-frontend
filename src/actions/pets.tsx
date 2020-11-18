@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000/api/v1";
 
-export const fetchPets = () => {
+export const fetchPets = (currentUserId: any) => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/pets`, {
       credentials: "include",
@@ -17,15 +17,16 @@ export const fetchPets = () => {
         if (response.errors) {
           console.log(response.errors);
         } else {
-          dispatch(setPets(response.data));
+          dispatch(setPets(response.data, currentUserId));
         }
       });
   };
 };
 
-export const setPets = (pets: any) => {
+export const setPets = (pets: any, currentUserId: any) => {
   return {
     type: "SET_PETS",
     pets,
+    currentUserId,
   };
 };

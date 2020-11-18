@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 class SignUpForm extends React.Component<any> {
   state = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
   };
@@ -28,7 +28,7 @@ class SignUpForm extends React.Component<any> {
           <br />
           <input
             type="text"
-            name="firstName"
+            name="first_name"
             placeholder="First Name"
             onChange={this.handleChange}
           />
@@ -37,7 +37,7 @@ class SignUpForm extends React.Component<any> {
           <br />
           <input
             type="text"
-            name="lastName"
+            name="last_name"
             placeholder="Last Name"
             onChange={this.handleChange}
           />

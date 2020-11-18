@@ -20,7 +20,7 @@ export const getCurrentUser = () => {
           console.log(response.errors);
         } else {
           dispatch(setCurrentUser(response.data));
-          dispatch(setHouseholds(response.included));
+          dispatch(setHouseholds(response));
         }
       });
   };
@@ -41,9 +41,9 @@ export const login = (credentials: any) => {
       .then((resp) => resp.json())
       .then((response) => {
         if (response.errors) {
-          alert(response.errors);
+          console.log(response.errors);
         } else {
-          dispatch(setCurrentUser(response));
+          dispatch(setCurrentUser(response.data));
         }
       });
     // .catch(alert);
@@ -90,11 +90,10 @@ export const signUp = (credentials: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        debugger;
         if (response.errors) {
-          alert(response.errors);
+          console.log(response.errors);
         } else {
-          dispatch(setCurrentUser(response));
+          dispatch(setCurrentUser(response.data));
           // history.push('/')
         }
       });
