@@ -12,13 +12,20 @@ const HouseholdInfo = (props: any) => {
   );
 
   const pets = useSelector(selectPets);
+  const currentUser = useSelector((state: any) => state.currentUser);
   return (
     <div>
       <h2>{props.household.attributes.name} Household</h2>
       <p>{props.household.attributes.address}</p>
+      {console.log(props.household.relationships.owner.data.id)}
+      {console.log(currentUser.id)}
+      {props.household.relationships.owner.data.id === currentUser.id && (
+        <button className="button">Edit</button>
+      )}
+
       <h3>Pets:</h3>
       {pets.map((pet: any) => {
-        return <p>{pet.attributes.name}</p>;
+        return <p key={pet.id}>{pet.attributes.name}</p>;
       })}
     </div>
   );
