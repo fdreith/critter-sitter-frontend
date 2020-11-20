@@ -28,9 +28,13 @@ class Pets extends React.Component<any> {
         <h2> Your Pets </h2>
         {this.props.pets.map((pet: any) => {
           return (
-            <li key={pet.id} onClick={() => this.handleOpen(pet)}>
+            <button
+              className="transparent"
+              key={pet.id}
+              onClick={() => this.handleOpen(pet)}
+            >
               {pet.attributes.name}
-            </li>
+            </button>
           );
         })}
 

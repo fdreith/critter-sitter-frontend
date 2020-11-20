@@ -50,12 +50,13 @@ class Households extends React.Component<any> {
         <h2> Your Households </h2>
         {this.props.households.map((household: any) => {
           return (
-            <li
+            <button
+              className="transparent"
               key={household.id}
               onClick={(event) => this.handleOpen(event, household)}
             >
               {household.attributes.name}
-            </li>
+            </button>
           );
         })}
         <Modal

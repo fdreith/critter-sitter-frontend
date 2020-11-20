@@ -18,12 +18,8 @@ const NavBar = (props: any) => {
         </>
       ) : (
         <div className="NavBar-right">
-          <NavLink className="navbar-item" to="/register">
-            Register
-          </NavLink>
-          <NavLink className="navbar-item" to="/login">
-            Login
-          </NavLink>
+          <NavLink to="/register">Register</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </div>
       )}
     </div>

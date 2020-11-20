@@ -19,7 +19,6 @@ class App extends Component<any> {
     this.props.history.push("/home");
   }
   render() {
-    console.log(this.props.currentUser);
     return (
       <div className="App">
         <NavBar
