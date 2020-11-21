@@ -9,9 +9,11 @@ const Modal = (props: any) => {
       <div className="classContent">{props.children}</div>
 
       <div>
-        <button className="top-right button" onClick={props.handleClose}>
-          Close
-        </button>
+        {props.handleClose && (
+          <button className="top-right button" onClick={props.handleClose}>
+            Close
+          </button>
+        )}
       </div>
     </div>
   );

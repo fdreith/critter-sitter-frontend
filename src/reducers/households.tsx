@@ -9,6 +9,15 @@ export default (state = [], action: any) => {
       return households;
     case "ADD_HOUSEHOLD":
       return state.concat(action.household.data);
+    case "UPDATE_HOUSEHOLD":
+      const updatedHouseholds = state.map((household: any) => {
+        if (household.id === action.household.data.id) {
+          return action.household.data;
+        } else {
+          return household;
+        }
+      });
+      return updatedHouseholds;
     case "DELETE_HOUSEHOLD":
       return state.filter(
         (household: any) => parseInt(household.id) !== action.householdId

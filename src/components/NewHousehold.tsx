@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import { postHousehold } from "../actions/households";
 
 class NewHousehold extends React.Component<any> {
-  // componentWillMount() {
-  //   this.props.fetchUsers();
-  // }
-
   state = {
     name: "",
     address: "",
@@ -24,6 +20,7 @@ class NewHousehold extends React.Component<any> {
   handleSubmit = (event: any) => {
     event.preventDefault();
     this.props.postHousehold(this.state, this.props.history);
+    this.props.handleClose();
   };
 
   render() {
@@ -44,7 +41,7 @@ class NewHousehold extends React.Component<any> {
           <input
             type="text"
             name="address"
-            placeholder="name of household"
+            placeholder="adress of household"
             onChange={this.handleChange}
           />
           <br />
@@ -57,17 +54,11 @@ class NewHousehold extends React.Component<any> {
             onChange={this.handleChange}
           />
           <br />
-          <input type="submit" value="Create Household" />
+          <input type="submit" value="Create Household" className="button" />
         </form>
       </div>
     );
   }
 }
-
-// const mapStateToProps = (state: any) => {
-//   return {
-//     users: state.users,
-//   };
-// };
 
 export default connect(null, { postHousehold })(NewHousehold);

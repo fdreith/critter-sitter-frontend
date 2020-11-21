@@ -40,3 +40,32 @@ export const addHousehold = (household: any) => {
     household,
   };
 };
+
+export const updateHousehold = (household: any, id: any) => {
+  return (dispatch: any) => {
+    return fetch(`${BASE_URL}/households/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(household),
+    })
+      .then((resp) => resp.json())
+      .then((response) => {
+        if (response.errors) {
+          console.log(response.errors);
+        } else {
+          dispatch(updateHouseholdStore(response));
+        }
+      });
+    // .catch(alert)
+  };
+};
+
+export const updateHouseholdStore = (household: any) => {
+  return {
+    type: "UPDATE_HOUSEHOLD",
+    household,
+  };
+};

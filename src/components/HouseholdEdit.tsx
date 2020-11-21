@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { postHousehold } from "../actions/households";
+import { updateHousehold } from "../actions/households";
 
 class HouseholdEdit extends React.Component<any> {
-
   state = {
-    name: "",
-    address: "",
-    owner_id: parseInt(this.props.currentUser.id),
-    password: "",
+    name: this.props.household.attributes.name,
+    address: this.props.household.attributes.address,
+    // owner_id: parseInt(this.props.currentUser.id),
+    // password: "",
   };
 
   handleChange = (event: any) => {
@@ -19,7 +18,8 @@ class HouseholdEdit extends React.Component<any> {
 
   handleSubmit = (event: any) => {
     event.preventDefault();
-    this.props.postHousehold(this.state, this.props.history);
+    this.props.updateHousehold({ ...this.state }, this.props.household.id);
+    this.props.handleClose();
   };
 
   render() {
@@ -31,7 +31,7 @@ class HouseholdEdit extends React.Component<any> {
           <input
             type="text"
             name="name"
-            placeholder="name of household"
+            value={this.state.name}
             onChange={this.handleChange}
           />
           <br />
@@ -40,30 +40,15 @@ class HouseholdEdit extends React.Component<any> {
           <input
             type="text"
             name="address"
-            placeholder="name of household"
+            value={this.state.address}
             onChange={this.handleChange}
           />
           <br />
-          Password:
-          <br />
-          <input
-            type="password"
-            name="password"
-            placeholder="passcode"
-            onChange={this.handleChange}
-          />
-          <br />
-          <input type="submit" value="Edit Household" />
+          <input type="submit" value="Edit Household" className="button" />
         </form>
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state: any) => {
-//   return {
-//     users: state.users,
-//   };
-// };
-
-export default connect(null, { postHousehold })(HouseholdEdit);
+export default connect(null, { updateHousehold })(HouseholdEdit);

@@ -6,10 +6,11 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import { withRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import Households from "./components/Households";
+import HouseholdsContainer from "./components/HouseholdsContainer";
 import Pets from "./components/Pets";
 import { fetchPets } from "./actions/pets";
 import { fetchEvents } from "./actions/events";
+import Modal from "./components/Modal";
 
 class App extends Component<any> {
   componentDidMount() {
@@ -18,6 +19,7 @@ class App extends Component<any> {
     this.props.fetchEvents();
     this.props.history.push("/home");
   }
+
   render() {
     return (
       <div className="App">
@@ -42,7 +44,7 @@ class App extends Component<any> {
             <Route
               path="/households"
               render={(routerProps) => (
-                <Households
+                <HouseholdsContainer
                   {...routerProps}
                   history={this.props.history}
                   currentUser={this.props.currentUser}

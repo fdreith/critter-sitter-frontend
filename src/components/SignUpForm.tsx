@@ -60,7 +60,7 @@ class SignUpForm extends React.Component<any> {
             onChange={this.handleChange}
           />
           <br />
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" className="button" />
           <br />
           <br />
           Already have an accout?<NavLink to="/login">Login</NavLink>

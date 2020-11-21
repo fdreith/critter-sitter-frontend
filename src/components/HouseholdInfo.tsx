@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { useState } from "react";
 import Modal from "./Modal";
+import HouseholdEdit from "./HouseholdEdit";
 
 const HouseholdInfo = (props: any) => {
   const selectPets = createSelector(
@@ -36,11 +37,9 @@ const HouseholdInfo = (props: any) => {
       {pets.map((pet: any) => {
         return <p key={pet.id}>{pet.attributes.name}</p>;
       })}
-      <Modal
-        household={props.household}
-        showModal={showModal}
-        handleClose={handleClose}
-      ></Modal>
+      <Modal showModal={showModal}>
+        <HouseholdEdit household={props.household} handleClose={handleClose} />
+      </Modal>
     </div>
   );
 };
