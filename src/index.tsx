@@ -11,6 +11,8 @@ import currentUser from "./reducers/currentUser";
 import households from "./reducers/households";
 import pets from "./reducers/pets";
 import events from "./reducers/events";
+import users from "./reducers/users";
+
 
 declare global {
   interface Window {
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   households,
   pets,
   events,
+  users,
 });
 
 export type RootReducer = ReturnType<typeof rootReducer>;

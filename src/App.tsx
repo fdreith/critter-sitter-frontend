@@ -10,6 +10,7 @@ import HouseholdsContainer from "./components/HouseholdsContainer";
 import Pets from "./components/Pets";
 import { fetchPets } from "./actions/pets";
 import { fetchEvents } from "./actions/events";
+import { fetchUsers } from "./actions/users";
 import Modal from "./components/Modal";
 
 class App extends Component<any> {
@@ -18,6 +19,7 @@ class App extends Component<any> {
     this.props.fetchPets();
     this.props.fetchEvents();
     this.props.history.push("/home");
+    this.props.fetchUsers();
   }
 
   render() {
@@ -83,7 +85,7 @@ const mapStateToProps = (state: any) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentUser, logout, fetchPets, fetchEvents })(
+  connect(mapStateToProps, { getCurrentUser, logout, fetchPets, fetchEvents, fetchUsers })(
     App
   )
 );
