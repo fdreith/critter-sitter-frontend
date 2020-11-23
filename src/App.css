@@ -3,8 +3,8 @@
 }
 
 .App * {
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 6px 10px;
+  margin: 2px;
 }
 
 .navbar {
@@ -44,7 +44,6 @@ input[type="text"] {
   padding: 10px;
   margin: 10px 0;
   border: 0;
-  border-bottom: 1px solid #eee;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
   width: 40%;
@@ -65,6 +64,26 @@ input,
 textarea {
   font-family: inherit;
   font-size: inherit;
+}
+
+.multi-select {
+  --rmsc-main: #db8b12 !important;
+  --rmsc-hover: #e2e6ea !important;
+  --rmsc-selected: #e2e6ea;
+  color: #000000;
+  padding: 0;
+  margin: 0 !important;
+  border: 0;
+}
+
+.multi-select * {
+  --rmsc-main: #db8b12 !important;
+  --rmsc-hover: #e2e6ea !important;
+  --rmsc-selected: #e2e6ea;
+  color: #000000;
+  padding: 0;
+  margin: 0 !important;
+  border: 0;
 }
 
 .container {
@@ -103,7 +122,7 @@ textarea {
 .button {
   display: inline-block;
   padding: 0.3em 1.2em;
-  margin: 1.5em;
+  margin: 0.5em;
   border: 0.16em solid rgba(255, 255, 255, 0);
   border-radius: 2em;
   box-sizing: border-box;
