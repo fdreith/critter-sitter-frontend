@@ -11,6 +11,7 @@ export const postHousehold = (credentials: any) => {
   return (dispatch: any) => {
     const householdInfo = {
       household: credentials,
+      users: {users: credentials.users}
     };
     return fetch(`${BASE_URL}/households`, {
       credentials: "include",
@@ -25,10 +26,13 @@ export const postHousehold = (credentials: any) => {
       .then((resp) => resp.json())
       .then((response) => {
         if (response.errors) {
+          debugger
           console.log(response.errors);
+
         } else {
+          debugger
           dispatch(addHousehold(response));
-        }
+}
       });
     // .catch(alert);
   };

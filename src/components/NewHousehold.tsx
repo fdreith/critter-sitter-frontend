@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { fetchUsers } from "../actions/users"
-// import { postHousehold } from "../actions/households";
+import { postHousehold } from "../actions/households";
 import MultiSelect from "react-multi-select-component";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 const  NewHousehold = (props: any) =>  {
 
   const options = useSelector((state: any) => {
     const users = state.users.map((user: any) => {
-      return {label: `${user.attributes.first_name} ${user.attributes.last_name}` , value: user}
+      return {label: `${user.attributes.first_name} ${user.attributes.last_name}` , value: user.id}
     })
     return users
   })
-    
-  const [values, setValues] = useState<any>({name: "", address: "", password: "", users: [], owner_id: parseInt(props.currentUser.id)})
-  
-  console.log(values)
 
+  const [state, setState] = useState<any>({name: "", address: "", password: "", users: [], owner_id: parseInt(props.currentUser.id)})
+  
   const handleChange = (event: any) => {
     if (event.target) {
       const {name, value} = event.target
-        setValues({...values, [name]: value})
+        setState({...state, [name]: value})
     } else {
-        setValues({...values, users: [...event]})
+        setState({...state, users: [...event]})
     }
-  
   };
+
+  const dispatch = useDispatch()
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.postHousehold(values, props.history);
-    props.handleClose();
+    dispatch(postHousehold(state));
+    props.handleClose()
   };
-
 
     return (
       <div className="contianer">
@@ -66,11 +64,11 @@ const  NewHousehold = (props: any) =>  {
           />
           <br />
           Add Users to Household:
-          <pre>{JSON.stringify(values.users.label)}</pre>
+          <pre>{JSON.stringify(state.users.label)}</pre>
           <MultiSelect
             className="multi-select"
             options={options}
-            value={values.users}
+            value={state.users}
             onChange={handleChange}
             labelledBy={"Select"}
             hasSelectAll={false}
