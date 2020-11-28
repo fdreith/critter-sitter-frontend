@@ -1,14 +1,14 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = 'http://localhost:3000/api/v1';
 
 export const fetchPets = (currentUserId: any) => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/pets`, {
-      credentials: "include",
-      method: "GET",
+      credentials: 'include',
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
         // "Access-Control-Allow-Credentials": "true",
-      },
+      }
     })
       .then((resp) => {
         return resp.json();
@@ -25,8 +25,8 @@ export const fetchPets = (currentUserId: any) => {
 
 export const setPets = (pets: any, currentUserId: any) => {
   return {
-    type: "SET_PETS",
+    type: 'SET_PETS',
     pets,
-    currentUserId,
+    currentUserId
   };
 };

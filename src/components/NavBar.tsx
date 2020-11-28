@@ -1,6 +1,6 @@
-import React from "react";
-import logo from "../images/Critter Sitter Logo - long.png";
-import { NavLink, Link } from "react-router-dom";
+import React from 'react';
+import logo from '../images/Critter Sitter Logo - long.png';
+import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = (props: any) => {
   return (

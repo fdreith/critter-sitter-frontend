@@ -1,24 +1,24 @@
-import React from "react";
-import Modal from "./Modal";
-import PetInfo from "./PetInfo";
+import React from 'react';
+import Modal from './Modal';
+import PetInfo from './PetInfo';
 
 class Pets extends React.Component<any> {
   state = {
     showModal: false,
-    pet: "",
+    pet: ''
   };
 
   handleOpen = (pet: any) => {
     this.setState({
       showModal: true,
-      pet: pet,
+      pet: pet
     });
   };
 
   handleClose = (event: any) => {
     this.setState({
       showModal: false,
-      pet: "",
+      pet: ''
     });
   };
 
@@ -39,7 +39,7 @@ class Pets extends React.Component<any> {
         })}
 
         <Modal
-          handleClose={this.handleClose}
+          // handleClose={this.handleClose}
           pet={this.state.pet}
           showModal={this.state.showModal}
         >

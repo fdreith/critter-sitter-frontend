@@ -1,22 +1,22 @@
-import React from "react";
+import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 
-const Modal = (props: any) => {
-  if (!props.showModal) {
-    return null;
-  }
-  return (
-    <div className="modal" id="modal">
-      <div className="classContent">{props.children}</div>
+import { withRouter } from 'react-router-dom';
 
-      <div>
-        {props.handleClose && (
-          <button className="top-right button" onClick={props.handleClose}>
-            Close
-          </button>
-        )}
-      </div>
+const Modal = (props: any) => (
+  <div
+    role="button"
+    className="modal-wrapper"
+    onClick={() => props.history.goBack()}
+  >
+    <div role="button" className="modal" onClick={(e) => e.stopPropagation()}>
+      <p>{props.children}</p>
+      {/* <button className="top-right button" onClick={props.onClick}>
+        X
+      </button> */}
     </div>
-  );
-};
+  </div>
+);
 
-export default Modal;
+export default withRouter(Modal);
+

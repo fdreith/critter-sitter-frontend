@@ -1,14 +1,14 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = 'http://localhost:3000/api/v1';
 
 export const fetchUsers = () => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/users`, {
-      credentials: "include",
-      method: "GET",
+      credentials: 'include',
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
         // "Access-Control-Allow-Credentials": "true",
-      },
+      }
     })
       .then((resp) => {
         return resp.json();
@@ -25,7 +25,7 @@ export const fetchUsers = () => {
 
 export const setUsers = (users: any) => {
   return {
-    type: "SET_USERS",
-    users,
+    type: 'SET_USERS',
+    users
   };
 };

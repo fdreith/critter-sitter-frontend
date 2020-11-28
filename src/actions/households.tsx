@@ -1,9 +1,9 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = 'http://localhost:3000/api/v1';
 
 export const setHouseholds = (data: any) => {
   return {
-    type: "SET_HOUSEHOLDS",
-    data,
+    type: 'SET_HOUSEHOLDS',
+    data
   };
 };
 
@@ -11,28 +11,27 @@ export const postHousehold = (credentials: any) => {
   return (dispatch: any) => {
     const householdInfo = {
       household: credentials,
-      users: {users: credentials.users}
+      users: { users: credentials.users }
     };
     return fetch(`${BASE_URL}/households`, {
-      credentials: "include",
-      method: "POST",
+      credentials: 'include',
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
         // "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(householdInfo),
+      body: JSON.stringify(householdInfo)
     })
       .then((resp) => resp.json())
       .then((response) => {
         if (response.errors) {
-          debugger
+          debugger;
           console.log(response.errors);
-
         } else {
-          debugger
+          debugger;
           dispatch(addHousehold(response));
-}
+        }
       });
     // .catch(alert);
   };
@@ -40,20 +39,20 @@ export const postHousehold = (credentials: any) => {
 
 export const addHousehold = (household: any) => {
   return {
-    type: "ADD_HOUSEHOLD",
-    household,
+    type: 'ADD_HOUSEHOLD',
+    household
   };
 };
 
 export const updateHousehold = (household: any, id: any) => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/households/${id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
-      body: JSON.stringify(household),
+      body: JSON.stringify(household)
     })
       .then((resp) => resp.json())
       .then((response) => {
@@ -69,7 +68,7 @@ export const updateHousehold = (household: any, id: any) => {
 
 export const updateHouseholdStore = (household: any) => {
   return {
-    type: "UPDATE_HOUSEHOLD",
-    household,
+    type: 'UPDATE_HOUSEHOLD',
+    household
   };
 };

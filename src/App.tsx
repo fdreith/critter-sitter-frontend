@@ -1,25 +1,24 @@
-import React, { Component } from "react";
-import "./App.css";
-import AuthContainer from "./components/AuthContainer";
-import { getCurrentUser, logout } from "./actions/currentUser";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
-import { withRouter, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import HouseholdsContainer from "./components/HouseholdsContainer";
-import Pets from "./components/Pets";
-import { fetchPets } from "./actions/pets";
-import { fetchEvents } from "./actions/events";
-import { fetchUsers } from "./actions/users";
-import Modal from "./components/Modal";
+import React, { Component } from 'react';
+import './App.css';
+import AuthContainer from './components/AuthContainer';
+import { getCurrentUser, logout } from './actions/currentUser';
+import Home from './components/Home';
+import NavBar from './components/NavBar';
+import { withRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import HouseholdsContainer from './components/HouseholdsContainer';
+import Pets from './components/Pets';
+import { fetchPets } from './actions/pets';
+import { fetchEvents } from './actions/events';
+import { fetchUsers } from './actions/users';
 
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
     this.props.fetchPets();
     this.props.fetchEvents();
-    this.props.history.push("/home");
     this.props.fetchUsers();
+    this.props.history.push('/home');
   }
 
   render() {
@@ -34,6 +33,7 @@ class App extends Component<any> {
         {this.props.loggedIn ? (
           <Switch>
             <Route
+              exact
               path="/home"
               render={(routerProps) => (
                 <Home
@@ -80,12 +80,16 @@ const mapStateToProps = (state: any) => {
     households: state.households,
     currentUser: state.currentUser,
     pets: state.pets,
-    events: state.events,
+    events: state.events
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentUser, logout, fetchPets, fetchEvents, fetchUsers })(
-    App
-  )
+  connect(mapStateToProps, {
+    getCurrentUser,
+    logout,
+    fetchPets,
+    fetchEvents,
+    fetchUsers
+  })(App)
 );

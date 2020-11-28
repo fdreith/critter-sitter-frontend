@@ -1,17 +1,17 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 class SignUpForm extends React.Component<any> {
   state = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
   };
 
   handleChange = (event: any) => {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 

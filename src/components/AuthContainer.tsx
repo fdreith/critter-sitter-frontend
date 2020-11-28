@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
-import { login, signUp } from "../actions/currentUser";
-import { Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
+import { login, signUp } from '../actions/currentUser';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class AuthContainer extends Component<any> {
   componentDidMount() {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
 
   render() {

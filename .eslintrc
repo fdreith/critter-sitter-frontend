@@ -1,0 +1,10 @@
+// https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code
+
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "semi": ["off", "never"],
+    "quotes": [2, "single"]
+  }
+}

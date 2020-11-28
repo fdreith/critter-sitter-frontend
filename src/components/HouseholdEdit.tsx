@@ -1,18 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import { updateHousehold } from "../actions/households";
+import React from 'react';
+import { connect } from 'react-redux';
+import { updateHousehold } from '../actions/households';
 
 class HouseholdEdit extends React.Component<any> {
   state = {
     name: this.props.household.attributes.name,
-    address: this.props.household.attributes.address,
+    address: this.props.household.attributes.address
     // owner_id: parseInt(this.props.currentUser.id),
     // password: "",
   };
 
   handleChange = (event: any) => {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 

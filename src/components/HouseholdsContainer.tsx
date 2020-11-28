@@ -1,61 +1,90 @@
-import React from "react";
-import HouseholdInfo from "./HouseholdInfo";
-import NewHousehold from "./NewHousehold";
-import Modal from "./Modal";
+import React, { useState } from 'react';
+import HouseholdInfo from './HouseholdInfo';
+import NewHousehold from './NewHousehold';
+import Modal from './Modal';
+import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import HouseholdEdit from './HouseholdEdit';
 
-class HouseholdsContainer extends React.Component<any> {
-  state = {
-    showModal: false,
-    household: "",
+const HouseholdsContainer = (props: any) => {
+  let match = useRouteMatch();
+
+  const [household, setHousehold] = useState<any>({ household: '' });
+
+  const modalProps = {
+    onClick: () => {
+      props.history.push(props.match.url);
+    }
   };
 
-  handleOpen = (event: any, household?: any) => {
-    this.setState({
-      showModal: true,
-      household: household,
-    });
-  };
+  return (
+    <div className="contianer">
+      <Link to="/households/new" className="button">
+        New Household
+      </Link>
 
-  handleClose = (event: any) => {
-    this.setState({
-      showModal: false,
-      household: "",
-    });
-  };
-
-  render() {
-    return (
-      <div className="contianer">
-        <button
-          className="button"
-          onClick={(event) => this.handleOpen(event, "")}
-        >
-          New Household
-        </button>
-
-        <Modal showModal={this.state.showModal} handleClose={this.handleClose}>
-          {this.state.household ? (
-            <HouseholdInfo household={this.state.household} />
-          ) : (
-            <NewHousehold currentUser={this.props.currentUser} />
+      <Switch>
+        <Route
+          path={`${match.path}/new`}
+          render={(routerProps) => (
+            <Modal {...modalProps}>
+              <NewHousehold
+                {...routerProps}
+                history={props.history}
+                currentUser={props.currentUser}
+                {...modalProps}
+              />
+            </Modal>
           )}
-        </Modal>
+        ></Route>
+        <Route
+          path={`${match.path}/:id/edit`}
+          render={(routerProps) => (
+            <Modal {...modalProps}>
+              <HouseholdEdit
+                {...routerProps}
+                household={household}
+                history={props.history}
+                {...modalProps}
+              />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id`}
+          render={(routerProps) => (
+            <Modal {...modalProps}>
+              <HouseholdInfo
+                {...routerProps}
+                household={household}
+                history={props.history}
+                currentUser={props.currentUser}
+                {...modalProps}
+              />
+            </Modal>
+          )}
+        ></Route>
+      </Switch>
 
-        <h2> Your Households </h2>
-        {this.props.households.map((household: any) => {
-          return (
-            <button
-              className="transparent"
+      <h2> Your Households </h2>
+      {props.households.map((household: any) => {
+        return (
+          <>
+            <Link
+              onClick={() => setHousehold(household)}
+              to={{
+                pathname: `/households/${household.id}`,
+                state: { showModal: true }
+              }}
               key={household.id}
-              onClick={(event) => this.handleOpen(event, household)}
             >
               {household.attributes.name}
-            </button>
-          );
-        })}
-      </div>
-    );
-  }
-}
+            </Link>
+            <br />
+          </>
+        );
+      })}
+    </div>
+  );
+};
 
 export default HouseholdsContainer;

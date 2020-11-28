@@ -1,14 +1,14 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = 'http://localhost:3000/api/v1';
 
 export const fetchEvents = () => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/events`, {
-      credentials: "include",
-      method: "GET",
+      credentials: 'include',
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
         // "Access-Control-Allow-Credentials": "true",
-      },
+      }
     })
       .then((resp) => {
         return resp.json();
@@ -25,7 +25,7 @@ export const fetchEvents = () => {
 
 export const setEvents = (events: any) => {
   return {
-    type: "SET_EVENTS",
-    events,
+    type: 'SET_EVENTS',
+    events
   };
 };
