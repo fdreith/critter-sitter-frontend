@@ -40,7 +40,7 @@ a:active {
   box-sizing: border-box;
 }
 
-input[type="text"] {
+input[type='text'] {
   padding: 10px;
   margin: 10px 0;
   border: 0;
@@ -49,7 +49,7 @@ input[type="text"] {
   width: 40%;
   outline-color: #db8b12;
 }
-input[type="password"] {
+input[type='password'] {
   padding: 10px;
   margin: 10px 0;
   border: 0;
@@ -138,17 +138,19 @@ textarea {
   border-radius: 2em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: #020202;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
   transition: all 0.2s;
   outline: none;
+  background-color: rgba(255, 254, 254, 0.74);
 }
 
 .button:hover {
   background-color: #d5d156;
+  color: #020202;
 }
 
 .transparent {
