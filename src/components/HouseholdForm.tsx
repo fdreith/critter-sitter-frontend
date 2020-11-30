@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-// import { fetchUsers } from "../actions/users"
-import { postHousehold } from '../actions/households';
+import {
+  postHousehold,
+  deleteHousehold,
+  updateHousehold
+} from '../actions/households';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
 
-const NewHousehold = (props: any) => {
+const HouseholdForm = (props: any) => {
   const options = useSelector((state: any) => {
     return state.users
       .map((user: any) => {
@@ -16,13 +19,28 @@ const NewHousehold = (props: any) => {
       .filter((user: any) => user.value !== props.currentUser.id);
   });
 
-  const [state, setState] = useState<any>({
-    name: '',
-    address: '',
-    password: '',
-    users: [],
-    owner_id: parseInt(props.currentUser.id)
-  });
+  const householdUserIds =
+    props.household &&
+    props.household.relationships.users.data.map((user: any) => user.id);
+  const selectedUsers =
+    props.household &&
+    options.filter((user: any) => {
+      return householdUserIds.includes(user.value);
+    });
+
+  const [state, setState] = props.household
+    ? useState<any>({
+        name: props.household.attributes.name,
+        address: props.household.attributes.address,
+        users: selectedUsers
+      })
+    : useState<any>({
+        name: '',
+        address: '',
+        // password: '',
+        users: [],
+        owner_id: parseInt(props.currentUser.id)
+      });
 
   const handleChange = (event: any) => {
     if (event.target) {
@@ -43,7 +61,15 @@ const NewHousehold = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    dispatch(postHousehold({ ...state, users: getUserIds() }, history));
+    props.household
+      ? dispatch(
+          updateHousehold(
+            { ...state, users: getUserIds() },
+            props.household.id,
+            history
+          )
+        )
+      : dispatch(postHousehold({ ...state, users: getUserIds() }, history));
   };
 
   return (
@@ -54,6 +80,7 @@ const NewHousehold = (props: any) => {
         <input
           type="text"
           name="name"
+          value={props.household && state.name}
           placeholder="name of household"
           onChange={handleChange}
         />
@@ -63,11 +90,12 @@ const NewHousehold = (props: any) => {
         <input
           type="text"
           name="address"
+          value={props.household && state.address}
           placeholder="adress of household"
           onChange={handleChange}
         />
         <br />
-        Password:
+        {/* Password:
         <br />
         <input
           type="password"
@@ -75,8 +103,8 @@ const NewHousehold = (props: any) => {
           placeholder="passcode"
           onChange={handleChange}
         />
-        <br />
-        Add Users to Household:
+        <br /> */}
+        Household Users:
         <pre>{JSON.stringify(state.users.label)}</pre>
         <MultiSelect
           className="multi-select"
@@ -89,11 +117,19 @@ const NewHousehold = (props: any) => {
         <br />
         <input type="submit" value="Create Household" className="button" />
       </form>
-      <button className="button" onClick={props.closeModal}>
+      <button className="button" onClick={() => props.history.goBack()}>
         Cancel
       </button>
+      {props.household && (
+        <button
+          className="button"
+          onClick={() => dispatch(deleteHousehold(props.household.id, history))}
+        >
+          Delete Household
+        </button>
+      )}
     </div>
   );
 };
 
-export default NewHousehold;
+export default HouseholdForm;

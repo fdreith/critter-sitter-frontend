@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import HouseholdInfo from './HouseholdInfo';
-import NewHousehold from './NewHousehold';
+import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
-import HouseholdEdit from './HouseholdEdit';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();
@@ -27,7 +26,7 @@ const HouseholdsContainer = (props: any) => {
           path={`${match.path}/new`}
           render={(routerProps) => (
             <Modal {...modalProps}>
-              <NewHousehold
+              <HouseholdForm
                 {...routerProps}
                 history={props.history}
                 currentUser={props.currentUser}
@@ -40,10 +39,11 @@ const HouseholdsContainer = (props: any) => {
           path={`${match.path}/:id/edit`}
           render={(routerProps) => (
             <Modal {...modalProps}>
-              <HouseholdEdit
+              <HouseholdForm
                 {...routerProps}
                 household={household}
                 history={props.history}
+                currentUser={props.currentUser}
                 {...modalProps}
               />
             </Modal>
