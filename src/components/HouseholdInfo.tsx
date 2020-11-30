@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { useState } from 'react';
-import Modal from './Modal';
-import HouseholdEdit from './HouseholdEdit';
-import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const HouseholdInfo = (props: any) => {
   let match = useRouteMatch();
+
+  //use selector for this specific household to update on state update
 
   const selectPets = createSelector(
     (state: any) => state.pets,

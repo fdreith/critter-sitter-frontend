@@ -6,13 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const NewHousehold = (props: any) => {
   const options = useSelector((state: any) => {
-    const users = state.users.map((user: any) => {
-      return {
-        label: `${user.attributes.first_name} ${user.attributes.last_name}`,
-        value: user.id
-      };
-    });
-    return users;
+    return state.users
+      .map((user: any) => {
+        return {
+          label: `${user.attributes.first_name} ${user.attributes.last_name}`,
+          value: user.id
+        };
+      })
+      .filter((user: any) => user.value !== props.currentUser.id);
   });
 
   const [state, setState] = useState<any>({
@@ -32,12 +33,17 @@ const NewHousehold = (props: any) => {
     }
   };
 
+  const getUserIds = () => {
+    const ids = state.users.map((user: any) => parseInt(user.value));
+    ids.push(state.owner_id);
+    return ids;
+  };
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    dispatch(postHousehold(state));
-    props.handleClose();
+    dispatch(postHousehold({ ...state, users: getUserIds() }, history));
   };
 
   return (
@@ -83,7 +89,9 @@ const NewHousehold = (props: any) => {
         <br />
         <input type="submit" value="Create Household" className="button" />
       </form>
-      <button>Cancel</button>
+      <button className="button" onClick={props.closeModal}>
+        Cancel
+      </button>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const HouseholdsContainer = (props: any) => {
   const [household, setHousehold] = useState<any>({ household: '' });
 
   const modalProps = {
-    onClick: () => {
+    closeModal: () => {
       props.history.push(props.match.url);
     }
   };
@@ -68,7 +68,7 @@ const HouseholdsContainer = (props: any) => {
       <h2> Your Households </h2>
       {props.households.map((household: any) => {
         return (
-          <>
+          <div key={household.id}>
             <Link
               onClick={() => setHousehold(household)}
               to={{
@@ -80,7 +80,7 @@ const HouseholdsContainer = (props: any) => {
               {household.attributes.name}
             </Link>
             <br />
-          </>
+          </div>
         );
       })}
     </div>

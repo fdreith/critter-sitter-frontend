@@ -7,7 +7,7 @@ export const setHouseholds = (data: any) => {
   };
 };
 
-export const postHousehold = (credentials: any) => {
+export const postHousehold = (credentials: any, history: any) => {
   return (dispatch: any) => {
     const householdInfo = {
       household: credentials,
@@ -26,11 +26,10 @@ export const postHousehold = (credentials: any) => {
       .then((resp) => resp.json())
       .then((response) => {
         if (response.errors) {
-          debugger;
           console.log(response.errors);
         } else {
-          debugger;
           dispatch(addHousehold(response));
+          history.go(-1);
         }
       });
     // .catch(alert);
@@ -44,15 +43,23 @@ export const addHousehold = (household: any) => {
   };
 };
 
-export const updateHousehold = (household: any, id: any) => {
+export const updateHousehold = (
+  household: any,
+  householdId: any,
+  history: any
+) => {
   return (dispatch: any) => {
-    return fetch(`${BASE_URL}/households/${id}`, {
+    const householdInfo = {
+      household: household,
+      users: { users: household.users }
+    };
+    return fetch(`${BASE_URL}/households/${householdId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(household)
+      body: JSON.stringify(householdInfo)
     })
       .then((resp) => resp.json())
       .then((response) => {
@@ -60,6 +67,7 @@ export const updateHousehold = (household: any, id: any) => {
           console.log(response.errors);
         } else {
           dispatch(updateHouseholdStore(response));
+          history.go(-1);
         }
       });
     // .catch(alert)
@@ -68,7 +76,33 @@ export const updateHousehold = (household: any, id: any) => {
 
 export const updateHouseholdStore = (household: any) => {
   return {
-    type: 'UPDATE_HOUSEHOLD',
+    type: 'UPDATE_HOUSEHOLDS',
     household
+  };
+};
+
+export const deleteHousehold = (householdId: any, history: any) => {
+  return (dispatch: any) => {
+    return fetch(`${BASE_URL}/households/${householdId}`, {
+      method: 'DELETE'
+    })
+      .then((resp) => resp.json())
+      .then((response) => {
+        if (response.message) {
+          // alert(response.message)
+          dispatch(deleteHouseholdStore(householdId));
+          history.go(-2);
+        } else {
+          throw new Error(response.errors);
+        }
+      });
+    // .catch(alert)
+  };
+};
+
+export const deleteHouseholdStore = (householdId: any) => {
+  return {
+    type: 'DELETE_HOUSEHOLD',
+    householdId
   };
 };

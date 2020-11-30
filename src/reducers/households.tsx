@@ -8,9 +8,8 @@ export default (state = [], action: any) => {
       });
       return households;
     case 'ADD_HOUSEHOLD':
-      debugger;
       return state.concat(action.household.data);
-    case 'UPDATE_HOUSEHOLD':
+    case 'UPDATE_HOUSEHOLDS':
       const updatedHouseholds = state.map((household: any) => {
         if (household.id === action.household.data.id) {
           return action.household.data;
@@ -21,7 +20,7 @@ export default (state = [], action: any) => {
       return updatedHouseholds;
     case 'DELETE_HOUSEHOLD':
       return state.filter(
-        (household: any) => parseInt(household.id) !== action.householdId
+        (household: any) => household.id !== action.householdId
       );
     default:
       return state;
