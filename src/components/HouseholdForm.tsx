@@ -66,10 +66,12 @@ const HouseholdForm = (props: any) => {
           updateHousehold(
             { ...state, users: getUserIds() },
             props.household.id,
-            history
+            props.history
           )
         )
-      : dispatch(postHousehold({ ...state, users: getUserIds() }, history));
+      : dispatch(
+          postHousehold({ ...state, users: getUserIds() }, props.history)
+        );
   };
 
   return (
@@ -115,7 +117,11 @@ const HouseholdForm = (props: any) => {
           hasSelectAll={false}
         />
         <br />
-        <input type="submit" value="Create Household" className="button" />
+        {props.household ? (
+          <input type="submit" value="Update Household" className="button" />
+        ) : (
+          <input type="submit" value="Create Household" className="button" />
+        )}
       </form>
       <button className="button" onClick={() => props.history.goBack()}>
         Cancel

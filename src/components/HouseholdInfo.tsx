@@ -6,8 +6,6 @@ import { Link, useRouteMatch } from 'react-router-dom';
 const HouseholdInfo = (props: any) => {
   let match = useRouteMatch();
 
-  //use selector for this specific household to update on state update
-
   const selectPets = createSelector(
     (state: any) => state.pets,
     (pets) =>
@@ -20,7 +18,7 @@ const HouseholdInfo = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
 
   return (
-    <div>
+    <div key={props.household.id}>
       <h2>{props.household.attributes.name} Household</h2>
       <p>{props.household.attributes.address}</p>
       {props.household.relationships.owner.data.id === currentUser.id && (

@@ -9,12 +9,6 @@ const HouseholdsContainer = (props: any) => {
 
   const [household, setHousehold] = useState<any>({ household: '' });
 
-  const modalProps = {
-    closeModal: () => {
-      props.history.push(props.match.url);
-    }
-  };
-
   return (
     <div className="contianer">
       <Link to="/households/new" className="button">
@@ -25,12 +19,11 @@ const HouseholdsContainer = (props: any) => {
         <Route
           path={`${match.path}/new`}
           render={(routerProps) => (
-            <Modal {...modalProps}>
+            <Modal>
               <HouseholdForm
                 {...routerProps}
                 history={props.history}
                 currentUser={props.currentUser}
-                {...modalProps}
               />
             </Modal>
           )}
@@ -38,13 +31,12 @@ const HouseholdsContainer = (props: any) => {
         <Route
           path={`${match.path}/:id/edit`}
           render={(routerProps) => (
-            <Modal {...modalProps}>
+            <Modal>
               <HouseholdForm
                 {...routerProps}
                 household={household}
                 history={props.history}
                 currentUser={props.currentUser}
-                {...modalProps}
               />
             </Modal>
           )}
@@ -52,13 +44,12 @@ const HouseholdsContainer = (props: any) => {
         <Route
           path={`${match.path}/:id`}
           render={(routerProps) => (
-            <Modal {...modalProps}>
+            <Modal>
               <HouseholdInfo
                 {...routerProps}
                 household={household}
                 history={props.history}
                 currentUser={props.currentUser}
-                {...modalProps}
               />
             </Modal>
           )}

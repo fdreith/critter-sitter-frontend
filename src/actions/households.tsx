@@ -67,7 +67,7 @@ export const updateHousehold = (
           console.log(response.errors);
         } else {
           dispatch(updateHouseholdStore(response));
-          history.go(-1);
+          history.push('/households');
         }
       });
     // .catch(alert)
