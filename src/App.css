@@ -53,17 +53,30 @@ input[type='password'] {
   padding: 10px;
   margin: 10px 0;
   border: 0;
-  /* border-bottom: 1px solid #eee; */
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
   width: 40%;
   outline-color: #db8b12;
 }
 
+input[type='radio'] {
+  margin: 5px 5px;
+}
+
 input,
 textarea {
   font-family: inherit;
   font-size: inherit;
+}
+
+textarea {
+  padding: 10px;
+  margin: 10px 0;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+  width: 80%;
+  outline-color: #db8b12;
 }
 
 .multi-select {

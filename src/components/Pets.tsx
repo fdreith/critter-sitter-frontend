@@ -1,53 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from './Modal';
+import PetForm from './PetForm';
 import PetInfo from './PetInfo';
 
-class Pets extends React.Component<any> {
-  state = {
-    showModal: false,
-    pet: ''
-  };
+const Pets = (props: any) => {
+  let match = useRouteMatch();
+  
+  const [pet, setPet] = useState<any>({ pet: '' });
 
-  handleOpen = (pet: any) => {
-    this.setState({
-      showModal: true,
-      pet: pet
-    });
-  };
+  return (
+    <div className="contianer">
+      <Link to="/pets/new" className="button">
+        New Pet
+      </Link>
 
-  handleClose = (event: any) => {
-    this.setState({
-      showModal: false,
-      pet: ''
-    });
-  };
-
-  render() {
-    return (
-      <div className="contianer">
-        <h2> Your Pets </h2>
-        {this.props.pets.map((pet: any) => {
-          return (
-            <button
-              className="transparent"
+      <Switch>
+        <Route
+          path={`${match.path}/new`}
+          render={(routerProps) => (
+            <Modal>
+              <PetForm
+                {...routerProps}
+                history={props.history}
+                currentUser={props.currentUser}
+              />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id/edit`}
+          render={(routerProps) => (
+            <Modal>
+              <PetForm
+                {...routerProps}
+                pet={pet}
+                history={props.history}
+                currentUser={props.currentUser}
+              />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <PetInfo
+                {...routerProps}
+                pet={pet}
+                history={props.history}
+                currentUser={props.currentUser}
+              />
+            </Modal>
+          )}
+        ></Route>
+      </Switch>
+      <h2> Your Pets </h2>
+      {props.pets.map((pet: any) => {
+        return (
+          <div key={pet.id}>
+            <Link
+              onClick={() => setPet(pet)}
+              to={{
+                pathname: `/pets/${pet.id}`,
+                state: { showModal: true }
+              }}
               key={pet.id}
-              onClick={() => this.handleOpen(pet)}
             >
               {pet.attributes.name}
-            </button>
-          );
-        })}
-
-        <Modal
-          // handleClose={this.handleClose}
-          pet={this.state.pet}
-          showModal={this.state.showModal}
-        >
-          <PetInfo pet={this.state.pet} />
-        </Modal>
-      </div>
-    );
-  }
-}
+            </Link>
+            <br />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default Pets;
