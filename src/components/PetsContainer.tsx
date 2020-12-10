@@ -4,9 +4,9 @@ import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
 
-const Pets = (props: any) => {
+const PetsContainer = (props: any) => {
   let match = useRouteMatch();
-  
+
   const [pet, setPet] = useState<any>({ pet: '' });
 
   return (
@@ -14,7 +14,6 @@ const Pets = (props: any) => {
       <Link to="/pets/new" className="button">
         New Pet
       </Link>
-
       <Switch>
         <Route
           path={`${match.path}/new`}
@@ -55,7 +54,7 @@ const Pets = (props: any) => {
           )}
         ></Route>
       </Switch>
-      <h2> Your Pets </h2>
+      {console.log(props.pets)} <h2> Your Pets </h2>
       {props.pets.map((pet: any) => {
         return (
           <div key={pet.id}>
@@ -77,4 +76,4 @@ const Pets = (props: any) => {
   );
 };
 
-export default Pets;
+export default PetsContainer;

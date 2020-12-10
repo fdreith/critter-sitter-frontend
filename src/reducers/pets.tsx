@@ -3,7 +3,7 @@ export default (state = [], action: any) => {
     case 'SET_PETS':
       return action.pets;
     case 'ADD_PET':
-      return state.concat(action.PET.data);
+      return state.concat(action.pet);
     case 'DELETE_PET':
       return state.filter((PET: any) => parseInt(PET.id) !== action.PETId);
     default:

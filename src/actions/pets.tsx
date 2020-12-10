@@ -51,7 +51,7 @@ export const postPet = (pet: any, history: any) => {
         if (response.errors) {
           console.log(response.errors);
         } else {
-          dispatch(addPet(response));
+          dispatch(addPet(response.data));
           history.go(-1);
         }
       });
