@@ -19,13 +19,10 @@ const HouseholdForm = (props: any) => {
       .filter((user: any) => user.value !== props.currentUser.id);
   });
 
-  const householdUserIds =
-    props.household &&
-    props.household.relationships.users.data.map((user: any) => user.id);
   const selectedUsers =
     props.household &&
     options.filter((user: any) => {
-      return householdUserIds.includes(user.value);
+      return props.household.relationships.users.data.some((user:any) => user.id === user.value)
     });
 
   const [state, setState] = props.household

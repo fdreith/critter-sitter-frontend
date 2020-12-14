@@ -1,5 +1,7 @@
 const BASE_URL = 'http://localhost:3000/api/v1';
 
+import { setRecords } from './records';
+
 export const fetchPets = (currentUserId: any) => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/pets`, {
@@ -18,6 +20,7 @@ export const fetchPets = (currentUserId: any) => {
           console.log(response.errors);
         } else {
           dispatch(setPets(response.data, currentUserId));
+          dispatch(setRecords(response.included));
         }
       });
   };
@@ -66,11 +69,7 @@ export const addPet = (pet: any) => {
   };
 };
 
-export const updatePet = (
-  pet: any,
-  petId: any,
-  history: any
-) => {
+export const updatePet = (pet: any, petId: any, history: any) => {
   return (dispatch: any) => {
     const petInfo = {
       pet: pet
@@ -128,4 +127,3 @@ export const deletePetStore = (petId: any) => {
     petId
   };
 };
-

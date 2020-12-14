@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { postPet, deletePet, updatePet } from '../actions/pets';
 import { useSelector, useDispatch } from 'react-redux';
-import { stat } from 'fs';
-import currentUser from '../reducers/currentUser';
 import { createSelector } from 'reselect';
 
 const PetForm = (props: any) => {
   const selectHouseholds = createSelector(
     (state: any) => state.households,
     (households) =>
-      households.filter(
-        (household: any) =>
-          household.relationships.owner.data.id === props.currentUser.id
+      households.filter((household: any) =>
+        household.relationships.users.data.some(
+          (user: any) => user.id === props.currentUser.id
+        )
       )
   );
 
@@ -20,12 +19,12 @@ const PetForm = (props: any) => {
   const [state, setState] = props.pet
     ? useState<any>({
         name: props.pet.attributes.name,
-        care: props.pet.attributes.care,
-        household_id: props.pet.relationships.hosuehold.data.id
+        care_instructions: props.pet.attributes.care_instructions,
+        household_id: props.pet.relationships.household.data.id
       })
     : useState<any>({
         name: '',
-        care: '',
+        care_instructions: '',
         household_id: '',
         owner_id: parseInt(props.currentUser.id)
       });
@@ -62,8 +61,8 @@ const PetForm = (props: any) => {
         <textarea
           rows={5}
           cols={40}
-          name="care"
-          value={props.pet && state.care}
+          name="care_instructions"
+          value={props.pet && state.care_instructions}
           placeholder="care instructions"
           onChange={handleChange}
         />

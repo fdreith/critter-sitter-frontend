@@ -10,7 +10,7 @@ import { combineReducers } from 'redux';
 import currentUser from './reducers/currentUser';
 import households from './reducers/households';
 import pets from './reducers/pets';
-import events from './reducers/events';
+import records from './reducers/records';
 import users from './reducers/users';
 
 declare global {
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   currentUser,
   households,
   pets,
-  events,
+  records,
   users
 });
 
