@@ -8,13 +8,13 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HouseholdsContainer from './components/HouseholdsContainer';
 import Pets from './components/PetsContainer';
-import { fetchPets } from './actions/pets';
 import { fetchUsers } from './actions/users';
+import { fetchItems } from './actions/fetch';
 
 class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
-    this.props.fetchPets();
+    this.props.fetchItems('pet');
     this.props.fetchUsers();
     this.props.history.push('/home');
   }
@@ -86,7 +86,7 @@ export default withRouter(
   connect(mapStateToProps, {
     getCurrentUser,
     logout,
-    fetchPets,
+    fetchItems,
     fetchUsers
   })(App)
 );

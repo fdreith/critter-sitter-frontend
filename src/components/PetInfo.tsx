@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { getRecordsByType } from './../utilities';
 
 // button for records
 // columns for ease on the eyes
@@ -10,6 +11,8 @@ const PetInfo = (props: any) => {
   let match = useRouteMatch();
 
   const currentUser = useSelector((state: any) => state.currentUser);
+  const events = getRecordsByType('event', props.pet.id);
+  console.log(events);
 
   return (
     <div>
@@ -23,6 +26,16 @@ const PetInfo = (props: any) => {
       {console.log(props.pet)}
       <h3>Events:</h3>
       {/* today needs to be changed */}
+      {events
+        ? events.map((event: any) => {
+            return (
+              <p key={event.id}>
+                {event.attributes.event_type} at {event.attributes.created_at}:{' '}
+                {event.attributes.details}
+              </p>
+            );
+          })
+        : 'No events recorded yet'}
       {/* {props.pet.relationships.events.data.length > 1
         ? props.pet.relationships.events.data
             .filter((event: any) => event.attributes.created_on === 'today')

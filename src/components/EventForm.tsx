@@ -1,50 +1,38 @@
 import React, { useState } from 'react';
-import { deleteItem, post, update } from '../actions/fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
 
-const PetForm = (props: any) => {
-  const selectHouseholds = createSelector(
-    (state: any) => state.households,
-    (households) =>
-      households.filter((household: any) =>
-        household.relationships.users.data.some(
-          (user: any) => user.id === props.currentUser.id
-        )
-      )
-  );
+const EventForm = (props: any) => {
+  // const [state, setState] = props.pet
+  //   ? useState<any>({
+  //       name: props.pet.attributes.name,
+  //       care_instructions: props.pet.attributes.care_instructions,
+  //       household_id: props.pet.relationships.household.data.id
+  //     })
+  //   : useState<any>({
+  //       name: '',
+  //       care_instructions: '',
+  //       household_id: '',
+  //       owner_id: parseInt(props.currentUser.id)
+  //     });
 
-  const households = useSelector(selectHouseholds);
+  // const handleChange = (event: any) => {
+  //   const { name, value } = event.target;
+  //   setState({ ...state, [name]: value });
+  // };
+  // console.log(state);
+  // const dispatch = useDispatch();
 
-  const [state, setState] = props.pet
-    ? useState<any>({
-        name: props.pet.attributes.name,
-        care_instructions: props.pet.attributes.care_instructions,
-        household_id: props.pet.relationships.household.data.id
-      })
-    : useState<any>({
-        name: '',
-        care_instructions: '',
-        household_id: '',
-        owner_id: parseInt(props.currentUser.id)
-      });
-
-  const handleChange = (event: any) => {
-    const { name, value } = event.target;
-    setState({ ...state, [name]: value });
-  };
-  const dispatch = useDispatch();
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    props.pet
-      ? dispatch(update(state, props.pet.id, props.history, 'pet'))
-      : dispatch(post(state, props.history, 'pet'));
-  };
+  // const handleSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   props.pet
+  //     ? dispatch(updatePet(state, props.pet.id, props.history))
+  //     : dispatch(postPet(state, props.history));
+  // };
 
   return (
     <div className="contianer">
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <label>Name of Pet:</label>
         <br />
         <input
@@ -94,13 +82,13 @@ const PetForm = (props: any) => {
       {props.pet && (
         <button
           className="button"
-          onClick={() => dispatch(deleteItem(props.pet.id, history, 'pet'))}
+          onClick={() => dispatch(deletePet(props.pet.id, history))}
         >
           Delete Pet
         </button>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default PetForm;
+export default EventForm;

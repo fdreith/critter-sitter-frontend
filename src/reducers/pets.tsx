@@ -1,13 +1,14 @@
 export default (state = [], action: any) => {
   switch (action.type) {
     case 'SET_PETS':
-      return action.pets;
+      debugger;
+      return action.items;
     case 'ADD_PET':
-      return state.concat(action.pet);
+      return state.concat(action.item);
     case 'UPDATE_PETS':
       const updatedPets = state.map((pet: any) => {
-        if (pet.id === action.pet.data.id) {
-          return action.pet.data;
+        if (pet.id === action.item.data.id) {
+          return action.item.data;
         } else {
           return pet;
         }
