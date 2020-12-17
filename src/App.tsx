@@ -15,7 +15,7 @@ class App extends Component<any> {
   componentDidMount() {
     this.props.getCurrentUser();
     this.props.fetchItems('pet');
-    this.props.fetchUsers();
+    this.props.fetchItems('user');
     this.props.history.push('/home');
   }
 

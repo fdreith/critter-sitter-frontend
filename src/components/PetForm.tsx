@@ -94,7 +94,9 @@ const PetForm = (props: any) => {
       {props.pet && (
         <button
           className="button"
-          onClick={() => dispatch(deleteItem(props.pet.id, history, 'pet'))}
+          onClick={() =>
+            dispatch(deleteItem(props.pet.id, props.history, 'pet'))
+          }
         >
           Delete Pet
         </button>

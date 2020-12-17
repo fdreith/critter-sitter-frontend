@@ -17,7 +17,6 @@ export const fetchItems = (type: any) => {
         if (response.error) {
           console.log(response.error);
         } else {
-          debugger;
           dispatch(setItems(response.data, type));
           response.included &&
             dispatch(setItems(response.included, response.included[0].type));
@@ -47,8 +46,10 @@ export const post = (item: any, history: any, type: any) => {
     })
       .then((resp) => resp.json())
       .then((response) => {
-        if (response.error) {
-          console.log(response.error);
+        if (response.errors) {
+          console.log(response.errors);
+          //TODO: error handling in form 
+          // alert(response.errors);
         } else {
           dispatch(addToStore(response.data, type));
           history.push(`/${type}s`);
@@ -78,6 +79,7 @@ export const update = (item: any, itemId: any, history: any, type: any) => {
       .then((resp) => resp.json())
       .then((response) => {
         if (response.error) {
+          //TODO: error handling in form
           console.log(response.error);
         } else {
           dispatch(updateItemStore(response.data, type));
@@ -105,7 +107,7 @@ export const deleteItem = (itemId: any, history: any, type: any) => {
         if (response.message) {
           // alert(response.message)
           dispatch(deleteItemStore(itemId, type));
-          history.go(-2);
+          history.push(`/${type}s`);
         } else {
           throw new Error(response.error);
         }

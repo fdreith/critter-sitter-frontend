@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import {
-  postHousehold,
-  deleteHousehold,
-  updateHousehold
-} from '../actions/households';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
+import { deleteItem, post, update } from '../actions/fetch';
 
 const HouseholdForm = (props: any) => {
   const options = useSelector((state: any) => {
@@ -22,7 +18,9 @@ const HouseholdForm = (props: any) => {
   const selectedUsers =
     props.household &&
     options.filter((user: any) => {
-      return props.household.relationships.users.data.some((user:any) => user.id === user.value)
+      return props.household.relationships.users.data.some(
+        (user: any) => user.id === user.value
+      );
     });
 
   const [state, setState] = props.household
@@ -60,14 +58,19 @@ const HouseholdForm = (props: any) => {
     event.preventDefault();
     props.household
       ? dispatch(
-          updateHousehold(
-            { ...state, users: getUserIds() },
+          update(
+            { household: state, users: { users: getUserIds() } },
             props.household.id,
-            props.history
+            props.history,
+            'household'
           )
         )
       : dispatch(
-          postHousehold({ ...state, users: getUserIds() }, props.history)
+          post(
+            { household: state, users: { users: getUserIds() } },
+            props.history,
+            'household'
+          )
         );
   };
 
@@ -126,7 +129,9 @@ const HouseholdForm = (props: any) => {
       {props.household && (
         <button
           className="button"
-          onClick={() => dispatch(deleteHousehold(props.household.id, history))}
+          onClick={() =>
+            dispatch(deleteItem(props.household.id, props.history, 'household'))
+          }
         >
           Delete Household
         </button>
