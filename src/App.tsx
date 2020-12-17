@@ -8,7 +8,6 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HouseholdsContainer from './components/HouseholdsContainer';
 import Pets from './components/PetsContainer';
-import { fetchUsers } from './actions/users';
 import { fetchItems } from './actions/fetch';
 
 class App extends Component<any> {
@@ -87,6 +86,5 @@ export default withRouter(
     getCurrentUser,
     logout,
     fetchItems,
-    fetchUsers
   })(App)
 );
