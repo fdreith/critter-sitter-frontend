@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import { getRecordsByType } from './../utilities';
+import { getRecordsByType, displayDate } from './../utilities';
 
 // button for records
 // columns for ease on the eyes
@@ -30,7 +29,8 @@ const PetInfo = (props: any) => {
         ? events.map((event: any) => {
             return (
               <p key={event.id}>
-                {event.attributes.event_type} at {event.attributes.created_at}:{' '}
+                {event.attributes.name} at{' '}
+                {displayDate(event.attributes.created_at)}:{' '}
                 {event.attributes.details}
               </p>
             );

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem, post, update } from '../actions/fetch';
 
 const HouseholdForm = (props: any) => {
+  const currentUser = useSelector((state: any) => state.currentUser);
+
   const options = useSelector((state: any) => {
     return state.users
       .map((user: any) => {
@@ -12,7 +14,7 @@ const HouseholdForm = (props: any) => {
           value: user.id
         };
       })
-      .filter((user: any) => user.value !== props.currentUser.id);
+      .filter((user: any) => user.value !== currentUser.id);
   });
 
   const selectedUsers =
@@ -34,7 +36,7 @@ const HouseholdForm = (props: any) => {
         address: '',
         // password: '',
         users: [],
-        owner_id: parseInt(props.currentUser.id)
+        owner_id: parseInt(currentUser.id)
       });
 
   const handleChange = (event: any) => {
