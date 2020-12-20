@@ -76,7 +76,7 @@ const PetForm = (props: any) => {
                 type="radio"
                 name="household_id"
                 value={household.id}
-                checked={state.household_id}
+                checked={state.household_id === household.id}
                 onChange={handleChange}
               />
               {household.attributes.name}

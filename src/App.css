@@ -60,7 +60,6 @@ input[type='text'] {
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
-  width: 40%;
   outline-color: #db8b12;
 }
 input[type='password'] {
@@ -69,7 +68,6 @@ input[type='password'] {
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
-  width: 40%;
   outline-color: #db8b12;
 }
 

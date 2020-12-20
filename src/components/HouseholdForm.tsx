@@ -102,6 +102,7 @@ const HouseholdForm = (props: any) => {
         {/* Password:
         <br />
         <input
+        
           type="password"
           name="password"
           placeholder="passcode"

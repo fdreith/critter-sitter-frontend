@@ -7,7 +7,6 @@ import NavBar from './components/NavBar';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HouseholdsContainer from './components/HouseholdsContainer';
-import Pets from './components/PetsContainer';
 import { fetchItems } from './actions/fetch';
 import RecordsContainer from './components/RecordsContainer';
 import PetsContainer from './components/PetsContainer';

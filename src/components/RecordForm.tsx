@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem, post, update } from '../actions/fetch';
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 
 const RecordForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
@@ -21,22 +23,28 @@ const RecordForm = (props: any) => {
     ? useState<any>({
         record_type: props.record.attributes.record_type,
         name: props.record.attributes.name,
-        details: props.record.attributes.details
-        // date: '',
+        details: props.record.attributes.details,
+        date: props.record.attributes.date
         // attachment: ''
       })
     : useState<any>({
-        record_type: 0,
+        record_type: 'event',
         name: '',
         details: '',
-        user_id: parseInt(currentUser.id)
-        // date: '',
+        user_id: parseInt(currentUser.id),
+        date: new Date()
         // attachment: ''
       });
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
     setState({ ...state, [name]: value });
+  };
+
+  const handleDateChange = (event: any) => {
+    setState({
+      date: event
+    });
   };
 
   const dispatch = useDispatch();
@@ -51,10 +59,45 @@ const RecordForm = (props: any) => {
         });
   };
 
+  console.log(state.date);
+
   return (
     <div className="contianer">
       <form onSubmit={handleSubmit}>
         <div>
+          Record Type:
+          <br />
+          <label>
+            <input
+              type="radio"
+              name="record_type"
+              value="event"
+              checked={state.record_type === 'event'}
+              onChange={handleChange}
+            />
+            Event
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="record_type"
+              value="reminder"
+              checked={state.record_type === 'reminder'}
+              onChange={handleChange}
+            />
+            Reminder
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="record_type"
+              value="vet"
+              checked={state.record_type === 'vet'}
+              onChange={handleChange}
+            />
+            Vet Record
+          </label>
+          <br />
           Name:
           <br />
           <input
@@ -91,6 +134,15 @@ const RecordForm = (props: any) => {
           </div>
         )}
         <br />
+        {state.record_type === 'reminder' && (
+          <Datetime
+            value={state.date}
+            onChange={handleDateChange}
+            dateFormat={true}
+          />
+        )}
+        <br />
+
         {props.Record ? (
           <input type="submit" value="Update Record" className="button" />
         ) : (
