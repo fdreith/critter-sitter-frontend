@@ -30,6 +30,11 @@ const PetForm = (props: any) => {
         owner_id: parseInt(currentUser.id)
       });
 
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setState({ ...state, [name]: value });
+  };
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event: any) => {
@@ -49,7 +54,7 @@ const PetForm = (props: any) => {
           name="name"
           value={props.pet && state.name}
           placeholder="name of pet"
-          onChange={setState}
+          onChange={handleChange}
         />
         <br />
         <label>Care Instructions:</label>
@@ -60,7 +65,7 @@ const PetForm = (props: any) => {
           name="care_instructions"
           value={props.pet && state.care_instructions}
           placeholder="care instructions"
-          onChange={setState}
+          onChange={handleChange}
         />
         <br />
         <label>Household:</label>
@@ -71,8 +76,8 @@ const PetForm = (props: any) => {
                 type="radio"
                 name="household_id"
                 value={household.id}
-                checked={state.household_id === household.id}
-                onChange={setState}
+                checked={state.household_id}
+                onChange={handleChange}
               />
               {household.attributes.name}
             </label>

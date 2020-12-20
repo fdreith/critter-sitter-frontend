@@ -3,7 +3,7 @@ import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
-import PetOverview from './PetOverview';
+import PetOverview from './Records';
 
 const PetsContainer = (props: any) => {
   let match = useRouteMatch();

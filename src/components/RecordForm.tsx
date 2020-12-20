@@ -17,13 +17,11 @@ const RecordForm = (props: any) => {
 
   const [pets, setPets] = useState<any>([]);
 
-  const [state, setState] = props.Record
+  const [state, setState] = props.record
     ? useState<any>({
         record_type: props.record.attributes.record_type,
         name: props.record.attributes.name,
         details: props.record.attributes.details
-        // pet_id: '',
-        // user_id: ''
         // date: '',
         // attachment: ''
       })
@@ -31,11 +29,15 @@ const RecordForm = (props: any) => {
         record_type: 0,
         name: '',
         details: '',
-        // pet_id: '',
         user_id: parseInt(currentUser.id)
         // date: '',
         // attachment: ''
       });
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setState({ ...state, [name]: value });
+  };
 
   const dispatch = useDispatch();
 
@@ -43,8 +45,10 @@ const RecordForm = (props: any) => {
     event.preventDefault();
     props.record
       ? dispatch(update(state, props.record.id, props.history, 'record'))
-      : // loop through an post for all pets & add pet_id
-        dispatch(post(state, props.history, 'record'));
+      : pets.map((pet: any) => {
+          const record = { ...state, pet_id: parseInt(pet.value) };
+          return dispatch(post(record, props.history, 'record'));
+        });
   };
 
   return (
@@ -56,9 +60,9 @@ const RecordForm = (props: any) => {
           <input
             type="text"
             name="name"
-            value={props.Record && state.name}
+            value={props.record && state.name}
             placeholder="Name of Record"
-            onChange={setState}
+            onChange={handleChange}
           />
           <br />
           Details:
@@ -66,9 +70,9 @@ const RecordForm = (props: any) => {
           <input
             type="text"
             name="details"
-            value={props.Record && state.details}
+            value={props.record && state.details}
             placeholder="Details of Record"
-            onChange={setState}
+            onChange={handleChange}
           />
           <br />
         </div>
@@ -102,7 +106,7 @@ const RecordForm = (props: any) => {
           <button
             className="button"
             onClick={() =>
-              dispatch(deleteItem(props.Record.id, props.history, 'Record'))
+              dispatch(deleteItem(props.record.id, props.history, 'record'))
             }
           >
             Delete Record

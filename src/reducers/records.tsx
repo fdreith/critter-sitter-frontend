@@ -3,7 +3,7 @@ export default (state = [], action: any) => {
     case 'SET_RECORDS':
       return action.items;
     case 'ADD_RECORD':
-      return state.concat(action.item.data);
+      return state.concat(action.item);
     case 'DELETE_RECORD':
       return state.filter(
         (record: any) => parseInt(record.id) !== action.itemId

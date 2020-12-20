@@ -11,7 +11,6 @@ const PetInfo = (props: any) => {
 
   const currentUser = useSelector((state: any) => state.currentUser);
   const events = getRecordsByType('event', props.pet.id);
-  console.log(events);
 
   return (
     <div>
@@ -22,7 +21,6 @@ const PetInfo = (props: any) => {
           Edit
         </Link>
       )}
-      {console.log(props.pet)}
       <h3>Events:</h3>
       {/* today needs to be changed */}
       {events

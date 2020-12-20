@@ -48,9 +48,10 @@ export const post = (item: any, history: any, type: any) => {
       .then((response) => {
         if (response.errors) {
           console.log(response.errors);
-          //TODO: error handling in form 
+          //TODO: error handling in form
           // alert(response.errors);
         } else {
+          debugger;
           dispatch(addToStore(response.data, type));
           history.push(`/${type}s`);
         }
