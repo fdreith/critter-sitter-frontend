@@ -23,3 +23,11 @@ export const getRecordsByType = (
     .filter((record: any) => record.attributes.record_type === type)
     .sort(sortBy(type === 'reminder' ? 'date' : 'created_at'));
 };
+
+export const displayDate = (unformattedDate: any) => {
+  const date = new Date(unformattedDate);
+  const month = date.getMonth() + 1;
+  const hour = date.getHours();
+  const min = date.getMinutes();
+  return `${hour}:${min} on ${month}-${date.getDate()}-${date.getFullYear()}`;
+};

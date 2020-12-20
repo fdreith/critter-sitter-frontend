@@ -3,6 +3,7 @@ import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
+import PetOverview from './PetOverview';
 
 const PetsContainer = (props: any) => {
   let match = useRouteMatch();
@@ -11,9 +12,6 @@ const PetsContainer = (props: any) => {
 
   return (
     <div className="contianer">
-      <Link to="/pets/new" className="button">
-        New Pet
-      </Link>
       <Switch>
         <Route
           path={`${match.path}/new`}
@@ -22,7 +20,6 @@ const PetsContainer = (props: any) => {
               <PetForm
                 {...routerProps}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
@@ -35,7 +32,6 @@ const PetsContainer = (props: any) => {
                 {...routerProps}
                 pet={pet}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
@@ -48,30 +44,36 @@ const PetsContainer = (props: any) => {
                 {...routerProps}
                 pet={pet}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
         ></Route>
       </Switch>
-      {console.log(props.pets)} <h2> Your Pets </h2>
-      {props.pets.map((pet: any) => {
-        return (
-          <div key={pet.id}>
-            <Link
-              onClick={() => setPet(pet)}
-              to={{
-                pathname: `/pets/${pet.id}`,
-                state: { showModal: true }
-              }}
-              key={pet.id}
-            >
-              {pet.attributes.name}
-            </Link>
-            <br />
-          </div>
-        );
-      })}
+      <Link to="/pets/new">
+        <i className="fas fa-plus fa-2x"></i>
+      </Link>
+      <h2> Your Pets </h2>
+      <div className="grid">
+        {props.pets.map((pet: any) => {
+          return (
+            <div key={pet.id}>
+              <Link
+                onClick={() => setPet(pet)}
+                to={{
+                  pathname: `/pets/${pet.id}`,
+                  state: { showModal: true }
+                }}
+                key={pet.id}
+              >
+                <h2>{pet.attributes.name}</h2>
+                <i className="fas fa-paw"></i>
+              </Link>
+              <PetOverview pet={pet} history={props.history} />
+              <br />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import HouseholdsContainer from './components/HouseholdsContainer';
 import Pets from './components/PetsContainer';
 import { fetchItems } from './actions/fetch';
+import RecordsContainer from './components/RecordsContainer';
+import PetsContainer from './components/PetsContainer';
 
 class App extends Component<any> {
   componentDidMount() {
@@ -36,7 +38,6 @@ class App extends Component<any> {
                 <Home
                   {...routerProps}
                   history={this.props.history}
-                  currentUser={this.props.currentUser}
                 />
               )}
             />
@@ -46,7 +47,6 @@ class App extends Component<any> {
                 <HouseholdsContainer
                   {...routerProps}
                   history={this.props.history}
-                  currentUser={this.props.currentUser}
                   households={this.props.households}
                 />
               )}
@@ -54,11 +54,19 @@ class App extends Component<any> {
             <Route
               path="/pets"
               render={(routerProps) => (
-                <Pets
+                <PetsContainer
                   {...routerProps}
                   history={this.props.history}
-                  currentUser={this.props.currentUser}
                   pets={this.props.pets}
+                />
+              )}
+            />
+            <Route
+              path="/records"
+              render={(routerProps) => (
+                <RecordsContainer
+                  {...routerProps}
+                  history={this.props.history}
                 />
               )}
             />
@@ -75,7 +83,6 @@ const mapStateToProps = (state: any) => {
   return {
     loggedIn: !!state.currentUser,
     households: state.households,
-    currentUser: state.currentUser,
     pets: state.pets,
     records: state.records
   };

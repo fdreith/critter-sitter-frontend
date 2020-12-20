@@ -3,6 +3,7 @@ import HouseholdInfo from './HouseholdInfo';
 import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import HouseholdOverview from './HouseholdOverview';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();
@@ -11,10 +12,6 @@ const HouseholdsContainer = (props: any) => {
 
   return (
     <div className="contianer">
-      <Link to="/households/new" className="button">
-        New Household
-      </Link>
-
       <Switch>
         <Route
           path={`${match.path}/new`}
@@ -23,7 +20,6 @@ const HouseholdsContainer = (props: any) => {
               <HouseholdForm
                 {...routerProps}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
@@ -36,7 +32,6 @@ const HouseholdsContainer = (props: any) => {
                 {...routerProps}
                 household={household}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
@@ -49,31 +44,39 @@ const HouseholdsContainer = (props: any) => {
                 {...routerProps}
                 household={household}
                 history={props.history}
-                currentUser={props.currentUser}
               />
             </Modal>
           )}
         ></Route>
       </Switch>
 
+      <Link to="/households/new">
+        <i className="fas fa-plus fa-2x"></i>
+      </Link>
       <h2> Your Households </h2>
-      {props.households.map((household: any) => {
-        return (
-          <div key={household.id}>
-            <Link
-              onClick={() => setHousehold(household)}
-              to={{
-                pathname: `/households/${household.id}`,
-                state: { showModal: true }
-              }}
-              key={household.id}
-            >
-              {household.attributes.name}
-            </Link>
-            <br />
-          </div>
-        );
-      })}
+      <div className="grid">
+        {props.households.map((household: any) => {
+          return (
+            <div key={household.id}>
+              <Link
+                onClick={() => setHousehold(household)}
+                to={{
+                  pathname: `/households/${household.id}`,
+                  state: { showModal: true }
+                }}
+                key={household.id}
+              >
+                <h2>{household.attributes.name}</h2>
+              </Link>
+              <HouseholdOverview
+                household={household}
+                history={props.history}
+              />
+              <br />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
