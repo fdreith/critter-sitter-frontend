@@ -8,7 +8,7 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HouseholdsContainer from './components/HouseholdsContainer';
 import { fetchItems } from './actions/fetch';
-import RecordsContainer from './components/RecordsContainer';
+import EventsContainer from './components/EventsContainer';
 import PetsContainer from './components/PetsContainer';
 
 class App extends Component<any> {
@@ -61,9 +61,9 @@ class App extends Component<any> {
               )}
             />
             <Route
-              path="/records"
+              path="/events"
               render={(routerProps) => (
-                <RecordsContainer
+                <EventsContainer
                   {...routerProps}
                   history={this.props.history}
                 />
@@ -83,7 +83,7 @@ const mapStateToProps = (state: any) => {
     loggedIn: !!state.currentUser,
     households: state.households,
     pets: state.pets,
-    records: state.records
+    events: state.events
   };
 };
 

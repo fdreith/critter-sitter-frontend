@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getRecordsByType, displayDate } from './../utilities';
+import { getEventsByType, displayDate } from './../utilities';
 
-// button for records
+// button for events
 // columns for ease on the eyes
 
 const PetInfo = (props: any) => {
   let match = useRouteMatch();
 
   const currentUser = useSelector((state: any) => state.currentUser);
-  const events = getRecordsByType('event', props.pet.id);
+  const events = getEventsByType('care', props.pet.id);
 
   return (
     <div>
@@ -49,13 +49,13 @@ const PetInfo = (props: any) => {
 
       <h3>Reminders:</h3>
       {/* today needs to be changed */}
-      {/* {props.pet.relationships.records.reminders.length > 1
-        ? props.pet.relationships.records.reminders.data
+      {/* {props.pet.relationships.events.reminders.length > 1
+        ? props.pet.relationships.events.reminders.data
             .filter((reminder: any) => reminder.attributes.date > 'today')
             .map((reminder: any) => {
               return (
                 <p key={reminder.id}>
-                  {reminder.attributes.record_type} due{' '}
+                  {reminder.attributes.event_type} due{' '}
                   {reminder.attributes.date}: {reminder.attributes.details}
                 </p>
               );

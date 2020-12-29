@@ -1,12 +1,12 @@
 export default (state = [], action: any) => {
   switch (action.type) {
-    case 'SET_RECORDS':
+    case 'SET_EVENTS':
       return action.items;
-    case 'ADD_RECORD':
+    case 'ADD_EVENT':
       return state.concat(action.item);
-    case 'DELETE_RECORD':
+    case 'DELETE_EVENT':
       return state.filter(
-        (record: any) => parseInt(record.id) !== action.itemId
+        (event: any) => parseInt(event.id) !== action.itemId
       );
     default:
       return state;

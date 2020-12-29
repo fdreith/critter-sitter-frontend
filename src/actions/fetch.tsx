@@ -33,6 +33,7 @@ export const setItems = (items: any, type: any) => {
 };
 
 export const post = (item: any, history: any, type: any) => {
+  debugger;
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/${type}s`, {
       credentials: 'include',
@@ -51,7 +52,9 @@ export const post = (item: any, history: any, type: any) => {
           //TODO: error handling in form
           // alert(response.errors);
         } else {
-          debugger;
+          if (type === 'event') {
+            history.go(-1);
+          }
           dispatch(addToStore(response.data, type));
           history.push(`/${type}s`);
         }

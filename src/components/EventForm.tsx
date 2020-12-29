@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem, post, update } from '../actions/fetch';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
+import FileUploadeder from './FileUploader';
 
-const RecordForm = (props: any) => {
+const EventForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
 
   const options = useSelector((state: any) => {
@@ -19,21 +20,27 @@ const RecordForm = (props: any) => {
 
   const [pets, setPets] = useState<any>([]);
 
-  const [state, setState] = props.record
+  const [selectedFile, setSelectedFile] = useState('');
+
+  useEffect(() => {
+    setState({ ...state, attachment: selectedFile });
+  }, [selectedFile]);
+
+  const [state, setState] = props.event
     ? useState<any>({
-        record_type: props.record.attributes.record_type,
-        name: props.record.attributes.name,
-        details: props.record.attributes.details,
-        date: props.record.attributes.date
-        // attachment: ''
+        event_type: props.event.attributes.event_type,
+        name: props.event.attributes.name,
+        details: props.event.attributes.details,
+        date: props.event.attributes.date,
+        attachment: props.event.attributes.attachment
       })
     : useState<any>({
-        record_type: 'event',
+        event_type: 'event',
         name: '',
         details: '',
         user_id: parseInt(currentUser.id),
-        date: new Date()
-        // attachment: ''
+        date: new Date(),
+        attachment: ''
       });
 
   const handleChange = (event: any) => {
@@ -46,33 +53,31 @@ const RecordForm = (props: any) => {
       date: event
     });
   };
-
+  console.log(state);
   const dispatch = useDispatch();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.record
-      ? dispatch(update(state, props.record.id, props.history, 'record'))
+    props.event
+      ? dispatch(update(state, props.event.id, props.history, 'event'))
       : pets.map((pet: any) => {
-          const record = { ...state, pet_id: parseInt(pet.value) };
-          return dispatch(post(record, props.history, 'record'));
+          const event = { ...state, pet_id: parseInt(pet.value) };
+          return dispatch(post(event, props.history, 'event'));
         });
   };
-
-  console.log(state.date);
 
   return (
     <div className="contianer">
       <form onSubmit={handleSubmit}>
         <div>
-          Record Type:
+          event Type:
           <br />
           <label>
             <input
               type="radio"
-              name="record_type"
+              name="event_type"
               value="event"
-              checked={state.record_type === 'event'}
+              checked={state.event_type === 'care'}
               onChange={handleChange}
             />
             Event
@@ -80,9 +85,9 @@ const RecordForm = (props: any) => {
           <label>
             <input
               type="radio"
-              name="record_type"
+              name="event_type"
               value="reminder"
-              checked={state.record_type === 'reminder'}
+              checked={state.event_type === 'reminder'}
               onChange={handleChange}
             />
             Reminder
@@ -90,12 +95,12 @@ const RecordForm = (props: any) => {
           <label>
             <input
               type="radio"
-              name="record_type"
+              name="event_type"
               value="vet"
-              checked={state.record_type === 'vet'}
+              checked={state.event_type === 'vet'}
               onChange={handleChange}
             />
-            Vet Record
+            Vet event
           </label>
           <br />
           Name:
@@ -103,8 +108,8 @@ const RecordForm = (props: any) => {
           <input
             type="text"
             name="name"
-            value={props.record && state.name}
-            placeholder="Name of Record"
+            value={props.event && state.name}
+            placeholder="Name of event"
             onChange={handleChange}
           />
           <br />
@@ -113,13 +118,13 @@ const RecordForm = (props: any) => {
           <input
             type="text"
             name="details"
-            value={props.record && state.details}
-            placeholder="Details of Record"
+            value={props.event && state.details}
+            placeholder="Details of event"
             onChange={handleChange}
           />
           <br />
         </div>
-        {props.record || (
+        {props.event || (
           <div>
             Pet(s):
             <pre>{JSON.stringify(pets.label)}</pre>
@@ -134,19 +139,32 @@ const RecordForm = (props: any) => {
           </div>
         )}
         <br />
-        {state.record_type === 'reminder' && (
+        {state.event_type === 'reminder' && (
           <Datetime
             value={state.date}
             onChange={handleDateChange}
             dateFormat={true}
           />
         )}
+        {state.event_type === 'vet' && (
+          <>
+            {/* <input
+              type="file"
+              value={selectedFile}
+              onChange={(e: any) => setSelectedFile(e.target.files[0])}
+            /> */}
+            <FileUploadeder
+              onFileSelectSuccess={(file: any) => setSelectedFile(file)}
+              onFileSelectError={({ error }: any) => alert(error)}
+            />
+          </>
+        )}
         <br />
 
-        {props.Record ? (
-          <input type="submit" value="Update Record" className="button" />
+        {props.event ? (
+          <input type="submit" value="Update event" className="button" />
         ) : (
-          <input type="submit" value="Create Record" className="button" />
+          <input type="submit" value="Create event" className="button" />
         )}
       </form>
       <div>
@@ -154,14 +172,14 @@ const RecordForm = (props: any) => {
           Cancel
         </button>
 
-        {props.Record && (
+        {props.event && (
           <button
             className="button"
             onClick={() =>
-              dispatch(deleteItem(props.record.id, props.history, 'record'))
+              dispatch(deleteItem(props.event.id, props.history, 'event'))
             }
           >
-            Delete Record
+            Delete event
           </button>
         )}
       </div>
@@ -169,4 +187,4 @@ const RecordForm = (props: any) => {
   );
 };
 
-export default RecordForm;
+export default EventForm;

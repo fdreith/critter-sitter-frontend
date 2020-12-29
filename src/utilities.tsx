@@ -13,14 +13,14 @@ const sortBy = (property: any) => {
   };
 };
 
-export const getRecordsByType = (
-  type: 'event' | 'vet' | 'reminder',
+export const getEventsByType = (
+  type: 'care' | 'vet' | 'reminder',
   petId: any
 ) => {
-  const records = useSelector((state: any) => state.records);
-  return records
-    .filter((record: any) => record.relationships.pet.data.id === petId)
-    .filter((record: any) => record.attributes.record_type === type)
+  const events = useSelector((state: any) => state.events);
+  return events
+    .filter((event: any) => event.relationships.pet.data.id === petId)
+    .filter((event: any) => event.attributes.event_type === type)
     .sort(sortBy(type === 'reminder' ? 'date' : 'created_at'));
 };
 

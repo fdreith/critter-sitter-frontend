@@ -5,7 +5,7 @@ class Home extends React.Component<any> {
   render() {
     return (
       <div>
-        <Link to="/records/new">
+        <Link to="/events/new">
           <i className="fas fa-plus fa-2x"></i>
         </Link>
         <div className="grid">

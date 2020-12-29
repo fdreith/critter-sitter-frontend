@@ -4,9 +4,9 @@ import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import HouseholdOverview from './HouseholdOverview';
-import RecordForm from './RecordForm';
+import EventForm from './EventForm';
 
-const RecordsContainer = (props: any) => {
+const EventsContainer = (props: any) => {
   let match = useRouteMatch();
 
   return (
@@ -16,7 +16,7 @@ const RecordsContainer = (props: any) => {
           path={`${match.path}/new`}
           render={(routerProps) => (
             <Modal>
-              <RecordForm {...routerProps} history={props.history} />
+              <EventForm {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
@@ -24,7 +24,7 @@ const RecordsContainer = (props: any) => {
           path={`${match.path}/:id/edit`}
           render={(routerProps) => (
             <Modal>
-              <RecordForm
+              <EventForm
                 {...routerProps}
                 history={props.history}
               />
@@ -35,7 +35,7 @@ const RecordsContainer = (props: any) => {
           path={`${match.path}/:id`}
           render={(routerProps) => (
             <Modal>
-              <RecordInfo
+              <EventInfo
                 {...routerProps}
                 history={props.history}
               />
@@ -48,4 +48,4 @@ const RecordsContainer = (props: any) => {
   );
 };
 
-export default RecordsContainer;
+export default EventsContainer;

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { setConstantValue } from 'typescript';
-import { getRecordsByType, displayDate } from '../utilities';
+import { getEventsByType, displayDate } from '../utilities';
 
-// button for records
+// button for events
 // columns for ease on the eyes
 
-const Records = (props: any) => {
+const Events = (props: any) => {
   let match = useRouteMatch();
 
-  const allEvents = getRecordsByType('event', props.pet.id);
+  const allEvents = getEventsByType('care', props.pet.id);
   const [numberOfEventsRendered, setNumberOfEventsRendered] = useState(5);
 
   const events = allEvents
@@ -39,13 +39,13 @@ const Records = (props: any) => {
       </button>
 
       {/* today needs to be changed */}
-      {/* {props.pet.relationships.records.reminders.length > 1
-        ? props.pet.relationships.records.reminders.data
+      {/* {props.pet.relationships.events.reminders.length > 1
+        ? props.pet.relationships.events.reminders.data
             .filter((reminder: any) => reminder.attributes.date > 'today')
             .map((reminder: any) => {
               return (
                 <p key={reminder.id}>
-                  {reminder.attributes.record_type} due{' '}
+                  {reminder.attributes.event_type} due{' '}
                   {reminder.attributes.date}: {reminder.attributes.details}
                 </p>
               );
@@ -55,4 +55,4 @@ const Records = (props: any) => {
   );
 };
 
-export default Records;
+export default Events;

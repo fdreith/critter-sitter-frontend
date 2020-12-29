@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useRouteMatch } from 'react-router-dom';
-import Records from './Records';
+import Events from './Events';
 
 const HouseholdOverview = (props: any) => {
   let match = useRouteMatch();
@@ -23,7 +23,7 @@ const HouseholdOverview = (props: any) => {
         return (
           <div key={pet.id}>
             <h3>{pet.attributes.name}</h3>
-            <Records pet={pet} history={props.history} />
+            <Events pet={pet} history={props.history} />
           </div>
         );
       })}
