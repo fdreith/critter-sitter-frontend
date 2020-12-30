@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { setConstantValue } from 'typescript';
 import { getEventsByType, displayDate } from '../utilities';
 
 // button for events
@@ -12,45 +11,31 @@ const Events = (props: any) => {
   const allEvents = getEventsByType('care', props.pet.id);
   const [numberOfEventsRendered, setNumberOfEventsRendered] = useState(5);
 
-  const events = allEvents
-    .slice(0, numberOfEventsRendered)
-    .map((event: any) => (
-      <div key={event.id}>
-        {event.attributes.name} at {displayDate(event.attributes.created_at)}:{' '}
-        {event.attributes.details}
-      </div>
-    ));
+  const events = allEvents.slice(0, numberOfEventsRendered);
 
   const noMoreToShow = numberOfEventsRendered >= allEvents.length;
-
+  const startNumberOfEvents = 5;
   const handleShowMore = () => {
     noMoreToShow
-      ? setNumberOfEventsRendered(5)
-      : setNumberOfEventsRendered(numberOfEventsRendered + 5);
+      ? setNumberOfEventsRendered(startNumberOfEvents)
+      : setNumberOfEventsRendered(numberOfEventsRendered + startNumberOfEvents);
   };
-
-  console.log(events);
-
+  
   return (
     <div>
-      {events ? events : 'No events recorded yet'}
-      <button className="button" onClick={handleShowMore}>
-        {noMoreToShow ? 'Show Less' : 'Show More'}
-      </button>
-
-      {/* today needs to be changed */}
-      {/* {props.pet.relationships.events.reminders.length > 1
-        ? props.pet.relationships.events.reminders.data
-            .filter((reminder: any) => reminder.attributes.date > 'today')
-            .map((reminder: any) => {
-              return (
-                <p key={reminder.id}>
-                  {reminder.attributes.event_type} due{' '}
-                  {reminder.attributes.date}: {reminder.attributes.details}
-                </p>
-              );
-            })
-        : 'No upcoming reminders'} */}
+      {events.length > 0
+        ? events.map((event: any) => (
+            <div key={event.id}>
+              {event.attributes.name} at {displayDate(event.attributes.date)}:{' '}
+              {event.attributes.details}
+            </div>
+          ))
+        : 'No events recorded yet'}
+      {events.length >= startNumberOfEvents && (
+        <button className="button" onClick={handleShowMore}>
+          {noMoreToShow ? 'Show Less' : 'Show More'}
+        </button>
+      )}
     </div>
   );
 };

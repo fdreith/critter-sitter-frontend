@@ -21,7 +21,7 @@ export const getEventsByType = (
   return events
     .filter((event: any) => event.relationships.pet.data.id === petId)
     .filter((event: any) => event.attributes.event_type === type)
-    .sort(sortBy(type === 'reminder' ? 'date' : 'created_at'));
+    .sort(sortBy('date'));
 };
 
 export const displayDate = (unformattedDate: any) => {
