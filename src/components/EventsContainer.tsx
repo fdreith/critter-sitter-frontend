@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import HouseholdInfo from './HouseholdInfo';
-import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
-import HouseholdOverview from './HouseholdOverview';
 import EventForm from './EventForm';
 
 const EventsContainer = (props: any) => {
@@ -24,10 +21,7 @@ const EventsContainer = (props: any) => {
           path={`${match.path}/:id/edit`}
           render={(routerProps) => (
             <Modal>
-              <EventForm
-                {...routerProps}
-                history={props.history}
-              />
+              <EventForm {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
@@ -43,7 +37,6 @@ const EventsContainer = (props: any) => {
           )}
         ></Route> */}
       </Switch>
-
     </div>
   );
 };

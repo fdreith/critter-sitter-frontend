@@ -53,7 +53,7 @@ const EventForm = (props: any) => {
       date: event
     });
   };
-  console.log(state);
+  
   const dispatch = useDispatch();
 
   const handleSubmit = (event: any) => {

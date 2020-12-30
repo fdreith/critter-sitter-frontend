@@ -4,11 +4,13 @@ import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import HouseholdOverview from './HouseholdOverview';
+import { useSelector } from 'react-redux';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();
 
   const [household, setHousehold] = useState<any>({ household: '' });
+  const households = useSelector((state: any) => state.households);
 
   return (
     <div className="contianer">
@@ -55,7 +57,7 @@ const HouseholdsContainer = (props: any) => {
       </Link>
       <h2> Your Households </h2>
       <div className="grid">
-        {props.households.map((household: any) => {
+        {households.map((household: any) => {
           return (
             <div key={household.id}>
               <Link

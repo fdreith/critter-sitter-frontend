@@ -3,12 +3,14 @@ import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
-import PetOverview from './Events';
+import Events from './Events';
+import { useSelector } from 'react-redux';
 
 const PetsContainer = (props: any) => {
   let match = useRouteMatch();
 
   const [pet, setPet] = useState<any>({ pet: '' });
+  const pets = useSelector((state: any) => state.pets);
 
   return (
     <div className="contianer">
@@ -54,7 +56,7 @@ const PetsContainer = (props: any) => {
       </Link>
       <h2> Your Pets </h2>
       <div className="grid">
-        {props.pets.map((pet: any) => {
+        {pets.map((pet: any) => {
           return (
             <div key={pet.id}>
               <Link
@@ -68,7 +70,7 @@ const PetsContainer = (props: any) => {
                 <h2>{pet.attributes.name}</h2>
                 <i className="fas fa-paw"></i>
               </Link>
-              <PetOverview pet={pet} history={props.history} />
+              <Events pet={pet} history={props.history} />
               <br />
             </div>
           );

@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000/api/v1';
 
-export const fetchItems = (type: any) => {
+export const fetchItems = (type: any, included?: boolean) => {
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/${type}s`, {
       credentials: 'include',
@@ -18,7 +18,7 @@ export const fetchItems = (type: any) => {
           console.log(response.error);
         } else {
           dispatch(setItems(response.data, type));
-          response.included &&
+          included &&
             dispatch(setItems(response.included, response.included[0].type));
         }
       });
@@ -33,7 +33,6 @@ export const setItems = (items: any, type: any) => {
 };
 
 export const post = (item: any, history: any, type: any) => {
-  debugger;
   return (dispatch: any) => {
     return fetch(`${BASE_URL}/${type}s`, {
       credentials: 'include',

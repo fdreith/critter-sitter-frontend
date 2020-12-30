@@ -42,7 +42,7 @@
           "src/reducers/currentUser.tsx",
           "src/reducers/households.tsx",
           "src/reducers/pets.tsx",
-          "src/reducers/records.tsx",
+          "src/reducers/events.tsx",
           "src/reducers/users.tsx"
         ],
         "rules": {
