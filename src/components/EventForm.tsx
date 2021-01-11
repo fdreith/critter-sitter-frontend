@@ -35,7 +35,7 @@ const EventForm = (props: any) => {
         attachment: props.event.attributes.attachment
       })
     : useState<any>({
-        event_type: 'event',
+        event_type: 'care',
         name: '',
         details: '',
         user_id: parseInt(currentUser.id),
@@ -53,7 +53,7 @@ const EventForm = (props: any) => {
       date: event
     });
   };
-  
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event: any) => {
@@ -70,7 +70,7 @@ const EventForm = (props: any) => {
     <div className="contianer">
       <form onSubmit={handleSubmit}>
         <div>
-          event Type:
+          Event Type:
           <br />
           <label>
             <input

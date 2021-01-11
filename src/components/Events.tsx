@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getEventsByType, displayDate } from '../utilities';
 
-// button for events
-// columns for ease on the eyes
 
 const Events = (props: any) => {
   let match = useRouteMatch();
@@ -20,18 +18,17 @@ const Events = (props: any) => {
       ? setNumberOfEventsRendered(startNumberOfEvents)
       : setNumberOfEventsRendered(numberOfEventsRendered + startNumberOfEvents);
   };
-  
+
   return (
     <div>
       {events.length > 0
         ? events.map((event: any) => (
             <div key={event.id}>
-              {event.attributes.name} at {displayDate(event.attributes.date)}:{' '}
-              {event.attributes.details}
+              {event.attributes.name} at {displayDate(event.attributes.date)}
             </div>
           ))
         : 'No events recorded yet'}
-      {events.length >= startNumberOfEvents && (
+      {events.length > startNumberOfEvents && (
         <button className="button" onClick={handleShowMore}>
           {noMoreToShow ? 'Show Less' : 'Show More'}
         </button>
