@@ -1,28 +1,31 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Events from './Events';
+import { selectEvent, selectPet, selectUser } from '../utilities';
 
 
 const EventInfo = (props: any) => {
   let match = useRouteMatch();
 
   const currentUser = useSelector((state: any) => state.currentUser);
+  const event = selectEvent(props.match.params.id);
+  const pet = selectPet(event.relationships.pet.data.id);
+  const user = selectUser(event.relationships.user.data.id);
 
   return (
     <div>
-      <h2>{props.event.attributes.name} </h2>
-      <p>{props.event.attributes.care_instructions}</p>
-      {props.event.relationships.owner.data.id === currentUser.id && (
+      <h2>
+        {pet.attributes.name} was {event.attributes.name}
+      </h2>
+      <p>
+        at {event.attributes.date} by {user.attributes.name}
+      </p>
+      <p>Details: {event.attributes.details}</p>
+      {event.relationships.user.data.id === currentUser.id && (
         <Link to={`${match.url}/edit`} className="button">
           Edit
         </Link>
       )}
-      <h3>Events:</h3>
-      <Events event={props.event} history={props.history} />
-
-      <h3>Reminders:</h3>
-      {/* reminders component */}
     </div>
   );
 };

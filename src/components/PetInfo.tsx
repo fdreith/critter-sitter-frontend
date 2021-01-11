@@ -3,17 +3,14 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Events from './Events';
 import { createSelector } from 'reselect';
+import { selectPet } from '../utilities';
 
 const PetInfo = (props: any) => {
   let match = useRouteMatch();
 
   const currentUser = useSelector((state: any) => state.currentUser);
+  const pet = selectPet(props.match.params.id);
 
-  const selectedPet = createSelector(
-    (state: any) => state.pets,
-    (pets) => pets.filter((pet: any) => pet.id === props.match.params.id)[0]
-  );
-  const pet = useSelector(selectedPet);
   return (
     <div>
       <h2>{pet.attributes.name} </h2>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { getEventsByType, displayDate } from '../utilities';
-
 
 const Events = (props: any) => {
   let match = useRouteMatch();
@@ -24,7 +23,9 @@ const Events = (props: any) => {
       {events.length > 0
         ? events.map((event: any) => (
             <div key={event.id}>
-              {event.attributes.name} at {displayDate(event.attributes.date)}
+              <Link to={`events/${event.id}`}>
+                {event.attributes.name} at {displayDate(event.attributes.date)}
+              </Link>
             </div>
           ))
         : 'No events recorded yet'}

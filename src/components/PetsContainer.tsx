@@ -8,8 +8,6 @@ import PetsGrid from './PetsGrid';
 const PetsContainer = (props: any) => {
   let match = useRouteMatch();
 
-  // const [pet, setPet] = useState<any>({ pet: '' });
-
   return (
     <div className="contianer">
       <Switch>

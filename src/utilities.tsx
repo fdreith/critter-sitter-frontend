@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 // const sortBy = (property: any) => {
 //   let sortOrder = 1;
@@ -46,4 +47,31 @@ export const displayDate = (unformattedDate: any) => {
   const hour = date.getHours();
   const min = date.getMinutes();
   return `${hour}:${min} on ${month}-${date.getDate()}-${date.getFullYear()}`;
+};
+
+export const selectEvent = (id: any) => {
+  const selectedEvent = createSelector(
+    (state: any) => state.events,
+    (events: any) => events.filter((event: any) => event.id === id)[0]
+  );
+  const event = useSelector(selectedEvent);
+  return event;
+};
+
+export const selectPet = (id: any) => {
+  const selectedPet = createSelector(
+    (state: any) => state.pets,
+    (pets) => pets.filter((pet: any) => pet.id === id)[0]
+  );
+  const pet = useSelector(selectedPet);
+  return pet;
+};
+
+export const selectUser = (id: any) => {
+  const selectedUser = createSelector(
+    (state: any) => state.users,
+    (users) => users.filter((user: any) => user.id === id)[0]
+  );
+  const user = useSelector(selectedUser);
+  return user;
 };
