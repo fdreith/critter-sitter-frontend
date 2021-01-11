@@ -3,14 +3,12 @@ import HouseholdInfo from './HouseholdInfo';
 import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
-import HouseholdOverview from './HouseholdOverview';
-import { useSelector } from 'react-redux';
+import HouseholdsGrid from './HouseholdsGrid';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();
 
   const [household, setHousehold] = useState<any>({ household: '' });
-  const households = useSelector((state: any) => state.households);
 
   return (
     <div className="contianer">
@@ -19,10 +17,7 @@ const HouseholdsContainer = (props: any) => {
           path={`${match.path}/new`}
           render={(routerProps) => (
             <Modal>
-              <HouseholdForm
-                {...routerProps}
-                history={props.history}
-              />
+              <HouseholdForm {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
@@ -52,33 +47,11 @@ const HouseholdsContainer = (props: any) => {
         ></Route>
       </Switch>
 
-      <Link to="/households/new">
+      <Link to="/events/new">
         <i className="fas fa-plus fa-2x"></i>
       </Link>
       <h2> Your Households </h2>
-      <div className="grid">
-        {households.map((household: any) => {
-          return (
-            <div key={household.id}>
-              <Link
-                onClick={() => setHousehold(household)}
-                to={{
-                  pathname: `/households/${household.id}`,
-                  state: { showModal: true }
-                }}
-                key={household.id}
-              >
-                <h2>{household.attributes.name}</h2>
-              </Link>
-              <HouseholdOverview
-                household={household}
-                history={props.history}
-              />
-              <br />
-            </div>
-          );
-        })}
-      </div>
+      <HouseholdsGrid setHousehold={setHousehold} />
     </div>
   );
 };

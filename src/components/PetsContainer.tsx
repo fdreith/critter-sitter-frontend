@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
-import Events from './Events';
-import { useSelector } from 'react-redux';
+import PetsGrid from './PetsGrid';
 
 const PetsContainer = (props: any) => {
   let match = useRouteMatch();
 
-  const [pet, setPet] = useState<any>({ pet: '' });
-  const pets = useSelector((state: any) => state.pets);
+  // const [pet, setPet] = useState<any>({ pet: '' });
 
   return (
     <div className="contianer">
@@ -19,10 +17,7 @@ const PetsContainer = (props: any) => {
           path={`${match.path}/new`}
           render={(routerProps) => (
             <Modal>
-              <PetForm
-                {...routerProps}
-                history={props.history}
-              />
+              <PetForm {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
@@ -30,11 +25,7 @@ const PetsContainer = (props: any) => {
           path={`${match.path}/:id/edit`}
           render={(routerProps) => (
             <Modal>
-              <PetForm
-                {...routerProps}
-                pet={pet}
-                history={props.history}
-              />
+              <PetForm {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
@@ -42,40 +33,16 @@ const PetsContainer = (props: any) => {
           path={`${match.path}/:id`}
           render={(routerProps) => (
             <Modal>
-              <PetInfo
-                {...routerProps}
-                pet={pet}
-                history={props.history}
-              />
+              <PetInfo {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>
       </Switch>
-      <Link to="/pets/new">
+      <Link to="/events/new">
         <i className="fas fa-plus fa-2x"></i>
       </Link>
       <h2> Your Pets </h2>
-      <div className="grid">
-        {pets.map((pet: any) => {
-          return (
-            <div key={pet.id}>
-              <Link
-                onClick={() => setPet(pet)}
-                to={{
-                  pathname: `/pets/${pet.id}`,
-                  state: { showModal: true }
-                }}
-                key={pet.id}
-              >
-                <h2>{pet.attributes.name}</h2>
-                <i className="fas fa-paw"></i>
-              </Link>
-              <Events pet={pet} history={props.history} />
-              <br />
-            </div>
-          );
-        })}
-      </div>
+      <PetsGrid />
     </div>
   );
 };
