@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import EventForm from './EventForm';
+import EventInfo from './EventInfo';
 
 const EventsContainer = (props: any) => {
   let match = useRouteMatch();
@@ -25,7 +26,7 @@ const EventsContainer = (props: any) => {
             </Modal>
           )}
         ></Route>
-        {/* <Route
+        <Route
           path={`${match.path}/:id`}
           render={(routerProps) => (
             <Modal>
@@ -35,7 +36,7 @@ const EventsContainer = (props: any) => {
               />
             </Modal>
           )}
-        ></Route> */}
+        ></Route>
       </Switch>
     </div>
   );
