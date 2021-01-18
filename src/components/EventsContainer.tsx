@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from './Modal';
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import EventForm from './EventForm';
 import EventInfo from './EventInfo';
 
@@ -30,10 +30,7 @@ const EventsContainer = (props: any) => {
           path={`${match.path}/:id`}
           render={(routerProps) => (
             <Modal>
-              <EventInfo
-                {...routerProps}
-                history={props.history}
-              />
+              <EventInfo {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>

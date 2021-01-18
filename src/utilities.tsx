@@ -17,11 +17,11 @@ import { createSelector } from 'reselect';
 const sortByDate = (events: any) => {
   return events.sort(function (a: any, b: any) {
     const dateA = a.attributes.date;
-    const dateB = b.attributes.due_date;
-    if (dateA < dateB) {
+    const dateB = b.attributes.date;
+    if (dateA > dateB) {
       return -1;
     }
-    if (dateA > dateB) {
+    if (dateA < dateB) {
       return 1;
     }
     return 0;
