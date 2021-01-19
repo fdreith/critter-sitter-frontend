@@ -16,7 +16,7 @@ const PetsGrid = (props: any) => {
               </div>
             );
           })
-        : 'No pets added yet'}
+        : 'No Pets Added Yet.'}
       <span>
         <Link to="/pets/new">
           <i className="icon fas fa-plus fa-2x" />

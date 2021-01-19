@@ -10,18 +10,20 @@ const HouseholdsGrid = (props: any) => {
 
   return (
     <div className="grid">
-      {households.map((household: any) => {
-        return (
-          <div key={household.id} className="remove-styles">
-            <Household
-              household={household}
-              setHousehold={props.setHousehold}
-              history={props.history}
-            />
-            <br />
-          </div>
-        );
-      })}
+      {households.length > 0
+        ? households.map((household: any) => {
+            return (
+              <div key={household.id} className="remove-styles">
+                <Household
+                  household={household}
+                  setHousehold={props.setHousehold}
+                  history={props.history}
+                />
+                <br />
+              </div>
+            );
+          })
+        : 'No Households Added Yet.'}
       <span>
         <Link to="/households/new">
           <i className="icon fas fa-plus fa-2x" />

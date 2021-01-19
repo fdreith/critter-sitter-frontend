@@ -34,13 +34,17 @@ const HouseholdInfo = (props: any) => {
       )}
 
       <h3>Pets:</h3>
-      {pets.map((pet: any) => (
-        <div key={pet.id}>
-          {/* works */}
-          {/* <Link to={{ pathname: `/pets/${pet.id}` }}> */}
-          <Link to={`${match.url}/pets/${pet.id}`}>{pet.attributes.name}</Link>
-        </div>
-      ))}
+      {pets.length > 0
+        ? pets.map((pet: any) => (
+            <div key={pet.id}>
+              {/* works */}
+              {/* <Link to={{ pathname: `/pets/${pet.id}` }}> */}
+              <Link to={`${match.url}/pets/${pet.id}`}>
+                {pet.attributes.name}
+              </Link>
+            </div>
+          ))
+        : 'No Pets Added Yet.'}
     </div>
   );
 };

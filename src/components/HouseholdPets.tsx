@@ -17,13 +17,14 @@ const HouseholdPets = (props: any) => {
 
   return (
     <div className="remove-styles">
-      {pets.map((pet: any) => {
+      {pets.length > 0
+        ? pets.map((pet: any) => {
         return (
           <div key={pet.id} className="remove-styles">
             <Pet pet={pet} setPet={setPet} />
           </div>
         );
-      })}
+      }): "No Pets Added Yet."}
     </div>
   );
 };
