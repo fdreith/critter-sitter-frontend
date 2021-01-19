@@ -25,7 +25,7 @@ const EventForm = (props: any) => {
     options.filter((option: any) => {
       return event.relationships.pet.data === option.value;
     });
-  const [pets, setPets] = useState<any>(selectedPets);
+  const [pets, setPets] = useState<any>(event ? selectedPets : []);
 
   const [selectedFile, setSelectedFile] = useState('');
 
@@ -131,18 +131,20 @@ const EventForm = (props: any) => {
           />
           <br />
         </div>
-        {/* {event || ( */}
-        Pet(s):
-        <pre>{JSON.stringify(pets.label)}</pre>
-        <MultiSelect
-          className="multi-select"
-          options={options}
-          value={pets}
-          onChange={setPets}
-          labelledBy={'Select'}
-          hasSelectAll={false}
-        />
-        {/* )} */}
+        {!event && (
+          <div>
+            <label>Pet(s):</label>
+            <pre>{JSON.stringify(pets.label)}</pre>
+            <MultiSelect
+              className="multi-select"
+              options={options}
+              value={pets}
+              onChange={setPets}
+              labelledBy={'Select'}
+              hasSelectAll={false}
+            />
+          </div>
+        )}
         <br />
         {state.event_type === 'reminder' && (
           <Datetime
