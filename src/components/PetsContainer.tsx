@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import EventInfo from './EventInfo';
 import Modal from './Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
@@ -24,6 +25,22 @@ const PetsContainer = (props: any) => {
           render={(routerProps) => (
             <Modal>
               <PetForm {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id/events/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <EventInfo {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/events/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <EventInfo {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>

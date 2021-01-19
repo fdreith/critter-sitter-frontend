@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import HouseholdInfo from './HouseholdInfo';
 import HouseholdForm from './HouseholdForm';
 import Modal from './Modal';
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Link, Redirect } from 'react-router-dom';
 import HouseholdsGrid from './HouseholdsGrid';
+import PetInfo from './PetInfo';
+import EventInfo from './EventInfo';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();
@@ -30,6 +32,46 @@ const HouseholdsContainer = (props: any) => {
                 household={household}
                 history={props.history}
               />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id/pets/:id/events/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <EventInfo {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/pets/:id/events/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <EventInfo {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/:id/pets/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <PetInfo {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/pets/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <PetInfo {...routerProps} history={props.history} />
+            </Modal>
+          )}
+        ></Route>
+        <Route
+          path={`${match.path}/events/:id`}
+          render={(routerProps) => (
+            <Modal>
+              <EventInfo {...routerProps} history={props.history} />
             </Modal>
           )}
         ></Route>

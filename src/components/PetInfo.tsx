@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Events from './Events';
-import { createSelector } from 'reselect';
 import { selectPet } from '../utilities';
 
 const PetInfo = (props: any) => {

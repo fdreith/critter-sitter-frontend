@@ -5,15 +5,16 @@ import Events from './Events';
 const Pet = (props: any) => {
   let match = useRouteMatch();
 
+  const location = () => {
+    if (match.path === '/pets') {
+      return { pathname: `${match.url}/${props.pet.id}` };
+    } else {
+      return { pathname: `${match.url}/pets/${props.pet.id}` };
+    }
+  };
   return (
     <div key={props.pet.id} className="remove-styles">
-      <Link
-        to={{
-          pathname: `/pets/${props.pet.id}`,
-          state: { showModal: true }
-        }}
-        key={props.pet.id}
-      >
+      <Link to={location} key={props.pet.id}>
         <span className="large">{props.pet.attributes.name}</span>
         <i className="fas fa-paw"></i>
       </Link>

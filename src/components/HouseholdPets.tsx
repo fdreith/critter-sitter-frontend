@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Pet from './Pet';
 import { createSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 const HouseholdPets = (props: any) => {
-  let match = useRouteMatch();
-
   const selectedPets = createSelector(
     (state: any) => state.pets,
     (pets) =>

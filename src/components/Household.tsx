@@ -9,10 +9,7 @@ const Household = (props: any) => {
     <div key={props.household.id} className="remove-styles">
       <Link
         onClick={() => props.setHousehold(props.household)}
-        to={{
-          pathname: `/households/${props.household.id}`,
-          state: { showModal: true }
-        }}
+        to={`${match.url}/${props.household.id}`}
         key={props.household.id}
       >
         <h2>{props.household.attributes.name}</h2>
