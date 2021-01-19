@@ -75,3 +75,11 @@ export const selectUser = (id: any) => {
   const user = useSelector(selectedUser);
   return user;
 };
+export const selectHousehold = (id: any) => {
+  const selectedHousehold = createSelector(
+    (state: any) => state.households,
+    (households) => households.filter((user: any) => user.id === id)[0]
+  );
+  const household = useSelector(selectedHousehold);
+  return household;
+};
