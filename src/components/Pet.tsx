@@ -14,7 +14,11 @@ const Pet = (props: any) => {
   };
   return (
     <div key={props.pet.id} className="remove-styles">
-      <Link to={location} key={props.pet.id}>
+      <Link
+        onClick={() => props.setPet(props.pet)}
+        to={location}
+        key={props.pet.id}
+      >
         <span className="large">{props.pet.attributes.name}</span>
         <i className="fas fa-paw"></i>
       </Link>

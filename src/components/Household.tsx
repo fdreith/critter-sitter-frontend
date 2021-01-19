@@ -8,7 +8,7 @@ const Household = (props: any) => {
   return (
     <div key={props.household.id} className="remove-styles">
       <Link
-        onClick={() => props.setHousehold(props.household)}
+        // onClick={() => props.setHousehold(props.household)}
         to={`${match.url}/${props.household.id}`}
         key={props.household.id}
       >

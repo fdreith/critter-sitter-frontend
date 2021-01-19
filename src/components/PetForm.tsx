@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { deleteItem, post, update } from '../actions/fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
+import { selectPet } from '../utilities';
 
 const PetForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
+  const pet = selectPet(props.match.params.id);
   const selectHouseholds = createSelector(
     (state: any) => state.households,
     (households) =>
@@ -17,11 +19,11 @@ const PetForm = (props: any) => {
 
   const households = useSelector(selectHouseholds);
 
-  const [state, setState] = props.pet
+  const [state, setState] = pet
     ? useState<any>({
-        name: props.pet.attributes.name,
-        care_instructions: props.pet.attributes.care_instructions,
-        household_id: props.pet.relationships.household.data.id
+        name: pet.attributes.name,
+        care_instructions: pet.attributes.care_instructions,
+        household_id: pet.relationships.household.data.id
       })
     : useState<any>({
         name: '',
@@ -39,8 +41,8 @@ const PetForm = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.pet
-      ? dispatch(update(state, props.pet.id, props.history, 'pet'))
+    pet
+      ? dispatch(update(state, pet.id, props.history, 'pet'))
       : dispatch(post(state, props.history, 'pet'));
   };
 
@@ -52,7 +54,7 @@ const PetForm = (props: any) => {
         <input
           type="text"
           name="name"
-          value={props.pet && state.name}
+          value={pet && state.name}
           placeholder="name of pet"
           onChange={handleChange}
         />
@@ -63,7 +65,7 @@ const PetForm = (props: any) => {
           rows={5}
           cols={40}
           name="care_instructions"
-          value={props.pet && state.care_instructions}
+          value={pet && state.care_instructions}
           placeholder="care instructions"
           onChange={handleChange}
         />
@@ -84,7 +86,7 @@ const PetForm = (props: any) => {
           </div>
         ))}
         <br />
-        {props.pet ? (
+        {pet ? (
           <input type="submit" value="Update Pet" className="button" />
         ) : (
           <input type="submit" value="Create Pet" className="button" />
@@ -93,12 +95,10 @@ const PetForm = (props: any) => {
       <button className="button" onClick={() => props.history.goBack()}>
         Cancel
       </button>
-      {props.pet && (
+      {pet && (
         <button
           className="button"
-          onClick={() =>
-            dispatch(deleteItem(props.pet.id, props.history, 'pet'))
-          }
+          onClick={() => dispatch(deleteItem(pet.id, props.history, 'pet'))}
         >
           Delete Pet
         </button>

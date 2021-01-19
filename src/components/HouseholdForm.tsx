@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem, post, update } from '../actions/fetch';
+import { selectHousehold } from '../utilities';
 
 const HouseholdForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
+  const household = selectHousehold(props.match.params.id);
 
   const options = useSelector((state: any) => {
     return state.users
@@ -18,17 +20,17 @@ const HouseholdForm = (props: any) => {
   });
 
   const selectedUsers =
-    props.household &&
-    options.filter((user: any) => {
-      return props.household.relationships.users.data.some(
-        (user: any) => user.id === user.value
+    household &&
+    options.filter((option: any) => {
+      return household.relationships.users.data.some(
+        (user: any) => user.id === option.value
       );
     });
 
-  const [state, setState] = props.household
+  const [state, setState] = household
     ? useState<any>({
-        name: props.household.attributes.name,
-        address: props.household.attributes.address,
+        name: household.attributes.name,
+        address: household.attributes.address,
         users: selectedUsers
       })
     : useState<any>({
@@ -58,11 +60,11 @@ const HouseholdForm = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.household
+    household
       ? dispatch(
           update(
             { household: state, users: { users: getUserIds() } },
-            props.household.id,
+            household.id,
             props.history,
             'household'
           )
@@ -84,7 +86,7 @@ const HouseholdForm = (props: any) => {
         <input
           type="text"
           name="name"
-          value={props.household && state.name}
+          value={household && state.name}
           placeholder="name of household"
           onChange={handleChange}
         />
@@ -94,7 +96,7 @@ const HouseholdForm = (props: any) => {
         <input
           type="text"
           name="address"
-          value={props.household && state.address}
+          value={household && state.address}
           placeholder="adress of household"
           onChange={handleChange}
         />
@@ -120,7 +122,7 @@ const HouseholdForm = (props: any) => {
           hasSelectAll={false}
         />
         <br />
-        {props.household ? (
+        {household ? (
           <input type="submit" value="Update Household" className="button" />
         ) : (
           <input type="submit" value="Create Household" className="button" />
@@ -129,11 +131,11 @@ const HouseholdForm = (props: any) => {
       <button className="button" onClick={() => props.history.goBack()}>
         Cancel
       </button>
-      {props.household && (
+      {household && (
         <button
           className="button"
           onClick={() =>
-            dispatch(deleteItem(props.household.id, props.history, 'household'))
+            dispatch(deleteItem(household.id, props.history, 'household'))
           }
         >
           Delete Household

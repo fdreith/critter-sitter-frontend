@@ -12,7 +12,7 @@ const PetsGrid = (props: any) => {
         ? pets.map((pet: any) => {
             return (
               <div key={pet.id} className="remove-styles">
-                <Pet pet={pet} />
+                <Pet pet={pet} setPet={props.setPet} />
               </div>
             );
           })

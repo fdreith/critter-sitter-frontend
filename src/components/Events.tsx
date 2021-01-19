@@ -23,7 +23,7 @@ const Events = (props: any) => {
       {events.length > 0
         ? events.map((event: any) => (
             <div key={event.id}>
-              <Link to={`${match.url}/events/${props.pet.id}`}>
+              <Link to={`${match.url}/events/${event.id}`}>
                 {event.attributes.name} at {displayDate(event.attributes.date)}
               </Link>
             </div>

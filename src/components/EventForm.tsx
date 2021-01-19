@@ -5,9 +5,11 @@ import { deleteItem, post, update } from '../actions/fetch';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import FileUploadeder from './FileUploader';
+import { selectEvent } from '../utilities';
 
 const EventForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
+  const event = selectEvent(props.match.params.id);
 
   const options = useSelector((state: any) => {
     return state.pets.map((pet: any) => {
@@ -18,7 +20,12 @@ const EventForm = (props: any) => {
     });
   });
 
-  const [pets, setPets] = useState<any>([]);
+  const selectedPets =
+    event &&
+    options.filter((option: any) => {
+      return event.relationships.pet.data === option.value;
+    });
+  const [pets, setPets] = useState<any>(selectedPets);
 
   const [selectedFile, setSelectedFile] = useState('');
 
@@ -26,13 +33,13 @@ const EventForm = (props: any) => {
     setState({ ...state, attachment: selectedFile });
   }, [selectedFile]);
 
-  const [state, setState] = props.event
+  const [state, setState] = event
     ? useState<any>({
-        event_type: props.event.attributes.event_type,
-        name: props.event.attributes.name,
-        details: props.event.attributes.details,
-        date: props.event.attributes.date,
-        attachment: props.event.attributes.attachment
+        event_type: event.attributes.event_type,
+        name: event.attributes.name,
+        details: event.attributes.details,
+        date: event.attributes.date,
+        attachment: event.attributes.attachment
       })
     : useState<any>({
         event_type: 'care',
@@ -58,8 +65,8 @@ const EventForm = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.event
-      ? dispatch(update(state, props.event.id, props.history, 'event'))
+    event
+      ? dispatch(update(state, event.id, props.history, 'event'))
       : pets.map((pet: any) => {
           const event = { ...state, pet_id: parseInt(pet.value) };
           return dispatch(post(event, props.history, 'event'));
@@ -67,7 +74,7 @@ const EventForm = (props: any) => {
   };
 
   return (
-    <div className="contianer">
+    <div>
       <form onSubmit={handleSubmit}>
         <div>
           Event Type:
@@ -76,11 +83,11 @@ const EventForm = (props: any) => {
             <input
               type="radio"
               name="event_type"
-              value="event"
+              value="care"
               checked={state.event_type === 'care'}
               onChange={handleChange}
             />
-            Event
+            Care
           </label>
           <label>
             <input
@@ -108,7 +115,7 @@ const EventForm = (props: any) => {
           <input
             type="text"
             name="name"
-            value={props.event && state.name}
+            value={event && state.name}
             placeholder="Name of event"
             onChange={handleChange}
           />
@@ -118,26 +125,24 @@ const EventForm = (props: any) => {
           <input
             type="text"
             name="details"
-            value={props.event && state.details}
+            value={event && state.details}
             placeholder="Details of event"
             onChange={handleChange}
           />
           <br />
         </div>
-        {props.event || (
-          <div>
-            Pet(s):
-            <pre>{JSON.stringify(pets.label)}</pre>
-            <MultiSelect
-              className="multi-select"
-              options={options}
-              value={pets}
-              onChange={setPets}
-              labelledBy={'Select'}
-              hasSelectAll={false}
-            />
-          </div>
-        )}
+        {/* {event || ( */}
+        Pet(s):
+        <pre>{JSON.stringify(pets.label)}</pre>
+        <MultiSelect
+          className="multi-select"
+          options={options}
+          value={pets}
+          onChange={setPets}
+          labelledBy={'Select'}
+          hasSelectAll={false}
+        />
+        {/* )} */}
         <br />
         {state.event_type === 'reminder' && (
           <Datetime
@@ -160,8 +165,7 @@ const EventForm = (props: any) => {
           </>
         )}
         <br />
-
-        {props.event ? (
+        {event ? (
           <input type="submit" value="Update event" className="button" />
         ) : (
           <input type="submit" value="Create event" className="button" />
@@ -172,11 +176,11 @@ const EventForm = (props: any) => {
           Cancel
         </button>
 
-        {props.event && (
+        {event && (
           <button
             className="button"
             onClick={() =>
-              dispatch(deleteItem(props.event.id, props.history, 'event'))
+              dispatch(deleteItem(event.id, props.history, 'event'))
             }
           >
             Delete event
