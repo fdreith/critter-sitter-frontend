@@ -51,11 +51,13 @@ export const post = (item: any, history: any, type: any) => {
           //TODO: error handling in form
           // alert(response.errors);
         } else {
+          // TODO: refactor to reduce code smell
           if (type === 'event') {
             history.go(-1);
+          } else {
+            history.push(`/${type}s`);
           }
           dispatch(addToStore(response.data, type));
-          history.push(`/${type}s`);
         }
       });
     // .catch(alert);
@@ -85,8 +87,12 @@ export const update = (item: any, itemId: any, history: any, type: any) => {
           //TODO: error handling in form
           console.log(response.error);
         } else {
+          if (type === 'event') {
+            history.go(-1);
+          } else {
+            history.push(`/${type}s`);
+          }
           dispatch(updateItemStore(response.data, type));
-          history.push(`/${type}s`);
         }
       });
     // .catch(alert)

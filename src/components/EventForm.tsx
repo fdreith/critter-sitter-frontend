@@ -9,7 +9,7 @@ import { selectEvent } from '../utilities';
 
 const EventForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);
-  const event = selectEvent(props.match.params.id);
+  const existingEvent = selectEvent(props.match.params.id);
 
   const options = useSelector((state: any) => {
     return state.pets.map((pet: any) => {
@@ -21,11 +21,11 @@ const EventForm = (props: any) => {
   });
 
   const selectedPets =
-    event &&
+    existingEvent &&
     options.filter((option: any) => {
-      return event.relationships.pet.data === option.value;
+      return existingEvent.relationships.pet.data.id === option.value;
     });
-  const [pets, setPets] = useState<any>(event ? selectedPets : []);
+  const [pets, setPets] = useState<any>(existingEvent ? selectedPets : []);
 
   const [selectedFile, setSelectedFile] = useState('');
 
@@ -33,13 +33,13 @@ const EventForm = (props: any) => {
     setState({ ...state, attachment: selectedFile });
   }, [selectedFile]);
 
-  const [state, setState] = event
+  const [state, setState] = existingEvent
     ? useState<any>({
-        event_type: event.attributes.event_type,
-        name: event.attributes.name,
-        details: event.attributes.details,
-        date: event.attributes.date,
-        attachment: event.attributes.attachment
+        event_type: existingEvent.attributes.event_type,
+        name: existingEvent.attributes.name,
+        details: existingEvent.attributes.details,
+        date: existingEvent.attributes.date,
+        attachment: existingEvent.attributes.attachment
       })
     : useState<any>({
         event_type: 'care',
@@ -65,8 +65,8 @@ const EventForm = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    event
-      ? dispatch(update(state, event.id, props.history, 'event'))
+    existingEvent
+      ? dispatch(update(state, existingEvent.id, props.history, 'event'))
       : pets.map((pet: any) => {
           const event = { ...state, pet_id: parseInt(pet.value) };
           return dispatch(post(event, props.history, 'event'));
@@ -115,7 +115,7 @@ const EventForm = (props: any) => {
           <input
             type="text"
             name="name"
-            value={event && state.name}
+            value={existingEvent && state.name}
             placeholder="Name of event"
             onChange={handleChange}
           />
@@ -125,26 +125,26 @@ const EventForm = (props: any) => {
           <input
             type="text"
             name="details"
-            value={event && state.details}
+            value={existingEvent && state.details}
             placeholder="Details of event"
             onChange={handleChange}
           />
           <br />
         </div>
-        {!event && (
-          <div>
-            <label>Pet(s):</label>
-            <pre>{JSON.stringify(pets.label)}</pre>
-            <MultiSelect
-              className="multi-select"
-              options={options}
-              value={pets}
-              onChange={setPets}
-              labelledBy={'Select'}
-              hasSelectAll={false}
-            />
-          </div>
-        )}
+        {/* {!existingEvent && ( */}
+        <div>
+          <label>Pet(s):</label>
+          <pre>{JSON.stringify(pets.label)}</pre>
+          <MultiSelect
+            className="multi-select"
+            options={options}
+            value={pets}
+            onChange={setPets}
+            labelledBy={'Select'}
+            hasSelectAll={false}
+          />
+        </div>
+        {/* )} */}
         <br />
         {state.event_type === 'reminder' && (
           <Datetime
@@ -167,7 +167,7 @@ const EventForm = (props: any) => {
           </>
         )}
         <br />
-        {event ? (
+        {existingEvent ? (
           <input type="submit" value="Update event" className="button" />
         ) : (
           <input type="submit" value="Create event" className="button" />
@@ -178,11 +178,11 @@ const EventForm = (props: any) => {
           Cancel
         </button>
 
-        {event && (
+        {existingEvent && (
           <button
             className="button"
             onClick={() =>
-              dispatch(deleteItem(event.id, props.history, 'event'))
+              dispatch(deleteItem(existingEvent.id, props.history, 'event'))
             }
           >
             Delete event
