@@ -51,7 +51,6 @@ export const post = (item: any, history: any, type: any) => {
           //TODO: error handling in form
           // alert(response.errors);
         } else {
-          // TODO: refactor to reduce code smell
           if (type === 'event') {
             history.go(-1);
           } else {
@@ -87,11 +86,7 @@ export const update = (item: any, itemId: any, history: any, type: any) => {
           //TODO: error handling in form
           console.log(response.error);
         } else {
-          if (type === 'event') {
-            history.go(-1);
-          } else {
-            history.push(`/${type}s`);
-          }
+          history.go(-1);
           dispatch(updateItemStore(response.data, type));
         }
       });
@@ -114,9 +109,14 @@ export const deleteItem = (itemId: any, history: any, type: any) => {
       .then((resp) => resp.json())
       .then((response) => {
         if (response.message) {
-          // alert(response.message)
+          //TODO pop up message instead of alert
+          alert(response.message);
           dispatch(deleteItemStore(itemId, type));
-          history.push(`/${type}s`);
+          if (type === 'event') {
+            history.go(-2);
+          } else {
+            history.push(`/${type}s`);
+          }
         } else {
           throw new Error(response.error);
         }

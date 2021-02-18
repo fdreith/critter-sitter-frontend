@@ -14,7 +14,7 @@ export default (state = [], action: any) => {
       });
       return updatedEvents;
     case 'DELETE_EVENT':
-      return state.filter((event: any) => parseInt(event.id) !== action.itemId);
+      return state.filter((event: any) => event.id !== action.itemId);
     default:
       return state;
   }
