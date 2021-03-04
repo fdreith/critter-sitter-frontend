@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { selectHousehold, selectUser } from '../utilities';
+import { selectHousehold, selectUser } from '../../utilities';
 
 const HouseholdInfo = (props: any) => {
   let match = useRouteMatch();

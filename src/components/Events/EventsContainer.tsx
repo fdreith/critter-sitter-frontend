@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from './Modal';
+import Modal from '../Modal';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import EventForm from './EventForm';
 import EventInfo from './EventInfo';

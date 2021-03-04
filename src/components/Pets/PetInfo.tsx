@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Events from './Events';
-import { selectPet } from '../utilities';
+import Events from '../Events/Events';
+import { selectPet } from '../../utilities';
 
 const PetInfo = (props: any) => {
   let match = useRouteMatch();
 
   const currentUser = useSelector((state: any) => state.currentUser);
   const pet = selectPet(props.match.params.id);
+
+  // const [view, setView] = useState('events');
 
   return (
     <div>
@@ -19,9 +21,14 @@ const PetInfo = (props: any) => {
           Edit
         </Link>
       )}
-      <h3>Events:</h3>
-      <Events pet={pet} history={props.history} />
 
+      {/* {view === 'events' && (
+        <> */}
+          <h3>Events:</h3>
+          <Events pet={pet} history={props.history} />
+        {/* </>
+      )} */}
+      
       <h3>Reminders:</h3>
       {/* reminders component */}
     </div>

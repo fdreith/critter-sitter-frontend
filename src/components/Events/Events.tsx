@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { getEventsByType, displayDate } from '../utilities';
+import { getEventsByType, displayDate } from '../../utilities';
 
 const Events = (props: any) => {
   let match = useRouteMatch();
@@ -20,15 +20,17 @@ const Events = (props: any) => {
 
   return (
     <div>
-      {events.length > 0
-        ? events.map((event: any) => (
-            <div key={event.id}>
-              <Link to={`${match.url}/events/${event.id}`}>
-                {event.attributes.name} at {displayDate(event.attributes.date)}
-              </Link>
-            </div>
-          ))
-        : 'No events recorded yet'}
+      {events.length > 0 ? (
+        events.map((event: any) => (
+          <div key={event.id}>
+            <Link to={`${match.url}/events/${event.id}`}>
+              {event.attributes.name} at {displayDate(event.attributes.date)}
+            </Link>
+          </div>
+        ))
+      ) : (
+        <div>'No events recorded yet'</div>
+      )}
       {allEvents.length > startNumberOfEvents && (
         <button className="button" onClick={handleShowMore}>
           {noMoreToShow ? 'Show Less' : 'Show More'}

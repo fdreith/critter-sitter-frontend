@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { deleteItem, post, update } from '../actions/fetch';
+import { deleteItem, post, update } from '../../actions/fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
-import { selectPet } from '../utilities';
+import { selectPet } from '../../utilities';
 
 const PetForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);

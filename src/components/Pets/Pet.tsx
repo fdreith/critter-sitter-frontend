@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Events from './Events';
+import Events from '../Events/Events';
 
 const Pet = (props: any) => {
   let match = useRouteMatch();

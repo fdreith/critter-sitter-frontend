@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import HouseholdInfo from './HouseholdInfo';
 import HouseholdForm from './HouseholdForm';
-import Modal from './Modal';
+import Modal from '../Modal';
 import { Switch, Route, useRouteMatch, Link, Redirect } from 'react-router-dom';
 import HouseholdsGrid from './HouseholdsGrid';
-import PetInfo from './PetInfo';
-import EventInfo from './EventInfo';
-import PetForm from './PetForm';
-import EventForm from './EventForm';
+import PetInfo from '../Pets/PetInfo';
+import EventInfo from '../Events/EventInfo';
+import PetForm from '../Pets/PetForm';
+import EventForm from '../Events/EventForm';
 
 const HouseholdsContainer = (props: any) => {
   let match = useRouteMatch();

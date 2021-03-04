@@ -6,10 +6,10 @@ import Home from './components/Home';
 import NavBar from './components/NavBar';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import HouseholdsContainer from './components/HouseholdsContainer';
+import HouseholdsContainer from './components/Households/HouseholdsContainer';
 import { fetchItems } from './actions/fetch';
-import EventsContainer from './components/EventsContainer';
-import PetsContainer from './components/PetsContainer';
+import EventsContainer from './components/Events/EventsContainer';
+import PetsContainer from './components/Pets/PetsContainer';
 
 const App = withRouter(({ history, ...props }) => {
   const loggedIn = useSelector((state: any) => !!state.currentUser);

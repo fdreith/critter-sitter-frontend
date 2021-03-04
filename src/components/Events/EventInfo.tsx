@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { displayDate, selectEvent, selectPet, selectUser } from '../utilities';
+import { displayDate, selectEvent, selectPet, selectUser } from '../../utilities';
 
 const EventInfo = (props: any) => {
   let match = useRouteMatch();

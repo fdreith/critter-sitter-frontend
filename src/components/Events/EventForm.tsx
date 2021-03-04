@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteItem, post, update } from '../actions/fetch';
+import { deleteItem, post, update } from '../../actions/fetch';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import FileUploadeder from './FileUploader';
-import { selectEvent } from '../utilities';
+import FileUploadeder from '../FileUploader';
+import { selectEvent } from '../../utilities';
 
 const EventForm = (props: any) => {
   const currentUser = useSelector((state: any) => state.currentUser);

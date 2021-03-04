@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
-import EventForm from './EventForm';
-import EventInfo from './EventInfo';
-import Modal from './Modal';
+import EventForm from '../Events/EventForm';
+import EventInfo from '../Events/EventInfo';
+import Modal from '../Modal';
 import PetForm from './PetForm';
 import PetInfo from './PetInfo';
 import PetsGrid from './PetsGrid';

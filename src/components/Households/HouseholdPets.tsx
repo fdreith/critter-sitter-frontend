@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Pet from './Pet';
+import Pet from '../Pets/Pet';
 import { createSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 
